@@ -1,147 +1,379 @@
-# PyViz - Python Visualization Dataset Pipeline
+# PYVEC Dataset
 
-A parallel pipeline to the TikZ extraction system, designed to extract Python visualization code (matplotlib, seaborn, plotly) from multiple sources and build a dataset for text-to-visualization generation.
+**Python Visualization Executable Code Dataset**
 
-## Project Structure
+A curated collection of **3,802 validated, executable Python visualization snippets** extracted from Kaggle, StackOverflow, GitHub, and official galleries. Every snippet is execution-tested to guarantee it produces a matplotlib/seaborn figure.
+
+## 📊 Dataset Overview
+
+| Source | Snippets | With Captions |
+|--------|----------|---------------|
+| **Kaggle** | 2,614 | 0 |
+| **StackOverflow** | 605 | 0 |
+| **Galleries** (Matplotlib/Seaborn) | 358 | 358 |
+| **GitHub** | 225 | ~50 |
+| **TOTAL** | **3,802** | **~408** |
+
+### Key Features
+- ✅ **100% executable** — All snippets validated by actual execution
+- ✅ **100% produce figures** — Verified via `plt.get_fignums()`
+- ✅ **Self-contained** — No external file dependencies or undefined variables
+- ✅ **Synthetic data injection** — Incomplete code automatically fixed with sample DataFrames
+- ✅ **Deduplicated** — MD5 hash checking removes duplicates
+
+## 📁 Project Structure
 
 ```
-PyViz/
-├── ArXiv/
-│   └── arxiv_extractor.py      # Extract Python viz code from ArXiv papers
+pyvec_dataset/
+├── Kaggle/
+│   ├── kaggle_smart_extractor.py        # Kaggle notebook extractor
+│   ├── kaggle_smart_validated.json      # 2,614 validated snippets
+│   └── notebooks/
+│       ├── seen_kernels_smart.json      # Tracks processed notebooks
+│       └── completed_queries.json       # Tracks search queries (19/68 done)
+├── StackOverflow/
+│   ├── stackoverflow_extractor.py       # StackOverflow API extractor
+│   ├── stackoverflow_validated.json     # 605 validated snippets
+│   └── seen_questions.json              # Tracks processed questions
 ├── GitHub/
-│   ├── github_extractor.py     # Search GitHub for repos with viz code
-│   ├── github_clone_compress.py # Clone and compress found repos
-│   └── github_cleaner.py       # Extract viz code from cloned repos
-├── Stack/
-│   └── stackexchange_extractor.py  # Extract from StackOverflow Q&A
-├── Debug/
-│   ├── llm_debug.py            # Use LLM to fix broken viz code
-│   └── llm_debug.job           # SLURM job script
-├── Describe/
-│   ├── vlm_captioning.py       # Generate captions for viz images
-│   └── vlm_captioning.job      # SLURM job script
-├── postprocess_code.py         # Main post-processing pipeline
-└── README.md
+│   ├── github_smart_extractor.py        # GitHub tutorial repo extractor
+│   ├── github_smart_validated.json      # 225 validated snippets
+│   ├── seen_repos_smart.json            # Tracks processed repos
+│   └── github_key.json                  # GitHub API keys (add your own)
+├── Galleries/
+│   ├── gallery_extractor.py             # Official gallery scraper
+│   └── gallery_validated.json           # 358 validated snippets
+├── Viewer/
+│   ├── backend/app.py                   # Flask API for browsing snippets
+│   ├── backend/requirements.txt         # Backend dependencies
+│   └── frontend/index.html              # Web UI
+├── all_validated_snippets.json          # Combined dataset (3,802 snippets)
+├── EXTRACTION_PIPELINE.md               # Detailed methodology
+└── MINDMAP.txt                          # Visual extraction pipeline
 ```
 
-## Data Sources
+## 🚀 Quick Start
 
-### 1. ArXiv Papers
-Extracts Python visualization code from ArXiv paper source files (`.py`, `.ipynb`).
+### Use the Dataset
+
+The complete dataset is in `all_validated_snippets.json`:
+
+```python
+import json
+
+# Load all snippets
+with open('all_validated_snippets.json', 'r') as f:
+    snippets = json.load(f)
+
+print(f"Total snippets: {len(snippets)}")
+
+# Example snippet structure
+snippet = snippets[0]
+print(snippet['code'])          # Python code
+print(snippet['source_type'])   # Kaggle/StackOverflow/GitHub/Galleries
+print(snippet.get('caption'))   # Description (if available)
+```
+
+### Run the Viewer
+
+Browse snippets in a web interface:
 
 ```bash
-cd ArXiv
-python arxiv_extractor.py
+cd Viewer/backend
+pip install -r requirements.txt
+python app.py
 ```
 
-### 2. GitHub Repositories
-Searches and clones GitHub repos containing matplotlib/seaborn/plotly code.
+Then open http://localhost:5000
+
+## 🔄 Extract More Data
+
+All extractors support **resumable execution** — they track progress and skip already-processed items.
+
+### Prerequisites
+
+```bash
+# Create conda environment
+conda create -n pyvec python=3.10
+conda activate pyvec
+
+# Install dependencies
+pip install kaggle requests beautifulsoup4 lxml tqdm numpy pandas matplotlib seaborn
+```
+
+### 1. Kaggle Extractor
+
+**Status:** 19/68 queries completed, 2,614 snippets extracted
+
+```bash
+cd Kaggle
+
+# Setup Kaggle API credentials (one-time)
+# 1. Go to https://www.kaggle.com/settings
+# 2. Create API token → downloads kaggle.json
+# 3. Move to ~/.kaggle/kaggle.json
+mkdir -p ~/.kaggle
+mv ~/Downloads/kaggle.json ~/.kaggle/
+chmod 600 ~/.kaggle/kaggle.json
+
+# Run extractor (resumes from query #20)
+python kaggle_smart_extractor.py
+```
+
+**How it works:**
+- Searches 68 queries (matplotlib, seaborn, titanic, iris, etc.)
+- Downloads notebooks, extracts plot cells
+- Tracks imports and data setup across cells
+- Injects synthetic DataFrames when needed
+- Validates by executing with 5s timeout
+- Saves progress: automatically resumes after rate limits
+
+**Expected yield:** ~2,000 more snippets from remaining 49 queries
+
+### 2. StackOverflow Extractor
+
+**Status:** 324 questions processed, 605 snippets extracted
+
+```bash
+cd StackOverflow
+
+# No authentication needed
+python stackoverflow_extractor.py
+```
+
+**How it works:**
+- Uses StackExchange API (300 requests/day limit)
+- Searches tags: matplotlib, seaborn, combinations
+- Extracts code blocks from high-score answers
+- Validates execution with synthetic data
+- Auto-retries on rate limit (429 errors)
+
+**Expected yield:** Continues until API exhaustion, then resume next day
+
+### 3. GitHub Extractor
+
+**Status:** 567 repos processed, 225 snippets extracted
 
 ```bash
 cd GitHub
-# Step 1: Find repos
-python github_extractor.py
 
-# Step 2: Clone and compress
-python github_clone_compress.py
+# Setup GitHub API key (required)
+# Create token at: https://github.com/settings/tokens
+# Needs: public_repo scope
+echo '["your_github_token_here"]' > github_key.json
 
-# Step 3: Extract viz code
-python github_cleaner.py
+# Run extractor
+python github_smart_extractor.py
 ```
 
-### 3. StackOverflow
-Extracts visualization code from StackOverflow Q&A posts tagged with matplotlib, seaborn, plotly.
+**How it works:**
+- Searches tutorial/example repositories
+- Downloads .py files, parses with AST
+- Extracts plot functions and standalone blocks
+- Validates with 10s timeout
+- Rotates API keys to avoid rate limits (5,000/hour per key)
+
+**Expected yield:** Continuous extraction from new repos
+
+### 4. Gallery Extractor
+
+**Status:** Complete (358/361 examples = 99.2% success)
 
 ```bash
-cd Stack
-python stackexchange_extractor.py
+cd Galleries
+
+# No authentication needed
+python gallery_extractor.py
 ```
 
-## Post-Processing
+**How it works:**
+- Scrapes official Matplotlib & Seaborn galleries
+- Downloads raw .py files from GitHub
+- Cleans sphinx directives and docstrings
+- Extracts docstrings as captions
+- 100% success rate (official examples)
 
-The main post-processing script extracts and cleans visualization code:
+**Expected yield:** Only new examples when galleries update
+
+### Combine Extracted Data
+
+After running extractors, merge into final dataset:
 
 ```bash
-python postprocess_code.py
+python -c "
+import json
+
+sources = {
+    'Kaggle': 'Kaggle/kaggle_smart_validated.json',
+    'StackOverflow': 'StackOverflow/stackoverflow_validated.json',
+    'GitHub': 'GitHub/github_smart_validated.json',
+    'Galleries': 'Galleries/gallery_validated.json'
+}
+
+all_snippets = []
+for name, path in sources.items():
+    with open(path) as f:
+        snippets = json.load(f)
+        for s in snippets:
+            s['source_type'] = name
+        all_snippets.extend(snippets)
+        print(f'{name}: {len(snippets)} snippets')
+
+with open('all_validated_snippets.json', 'w') as f:
+    json.dump(all_snippets, f, indent=2, ensure_ascii=False)
+
+print(f'TOTAL: {len(all_snippets)} snippets')
+"
 ```
 
-Features:
-- Detects matplotlib, seaborn, and plotly code
-- Extracts code from markdown blocks and Jupyter notebooks
-- Adds missing imports automatically
-- Extracts captions and text mentions
+## 📋 Dataset Schema
 
-## Captioning Pipeline
-
-Generate detailed descriptions for visualization images using a VLM:
-
-```bash
-cd Describe
-python vlm_captioning.py \
-    --model_id "your-vlm-model" \
-    --batch_size 8 \
-    --dataset_path "path/to/images" \
-    --max_retries 3
+```json
+{
+  "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.linspace(0, 10, 100)\nplt.plot(x, np.sin(x))\nplt.show()",
+  "caption": "Simple sine wave plot",
+  "library": "matplotlib",
+  "source_type": "Kaggle",
+  "source": "https://www.kaggle.com/username/notebook",
+  "file_id": "kaggle_123456_0"
+}
 ```
 
-## Debugging Pipeline
+| Field | Type | Coverage | Description |
+|-------|------|----------|-------------|
+| `code` | string | 100% | Python source code |
+| `caption` | string | ~11% | Description (Galleries only) |
+| `library` | string | 100% | matplotlib, seaborn, or both |
+| `source_type` | string | 100% | Kaggle, StackOverflow, GitHub, or Galleries |
+| `source` | string | 100% | Original URL or reference |
+| `file_id` | string | 100% | Unique identifier |
 
-Fix broken visualization code using an LLM:
+## 🔬 Validation Pipeline
 
-```bash
-cd Debug
-python llm_debug.py \
-    --model_id "your-llm-model" \
-    --batch_size 16 \
-    --dataset_path "path/to/broken/code" \
-    --max_retries 3
+Every snippet passes through:
+
+1. **Code Execution Test**
+   - Sets matplotlib backend: `matplotlib.use('Agg')`
+   - 5-10 second timeout
+   - Catches all exceptions
+
+2. **Figure Verification**
+   - Checks `plt.get_fignums() > 0`
+   - Must create at least one figure
+
+3. **Synthetic Data Injection**
+   - Detects undefined variables: `df`, `data`, `x`, `y`
+   - Injects 100-row DataFrame with numeric, categorical, temporal columns
+   - Makes incomplete code runnable
+
+4. **Bad Pattern Filtering**
+   - Rejects: file I/O (`read_csv`, `read_excel`)
+   - Rejects: network calls (`requests`, `urllib`)
+   - Rejects: ML frameworks (`torch`, `tensorflow`)
+
+5. **Deduplication**
+   - MD5 hash of code
+   - Removes exact duplicates
+
+## 📖 Documentation
+
+- **`EXTRACTION_PIPELINE.md`** — Detailed technical methodology, API usage, validation algorithms
+- **`MINDMAP.txt`** — Visual ASCII tree of the extraction pipeline
+
+## 🛠️ Requirements
+
+```txt
+# Core
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+tqdm>=4.66.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Visualization (for validation)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# APIs
+kaggle>=1.5.0
+PyGithub>=2.1.0
+
+# Web viewer
+flask>=2.3.0
+flask-cors>=4.0.0
 ```
 
-## Supported Libraries
+## 📊 Statistics
 
-| Library | Import Patterns | Plot Calls |
-|---------|-----------------|------------|
-| **matplotlib** | `import matplotlib`, `from matplotlib` | `plt.plot`, `plt.scatter`, `plt.bar`, `plt.hist`, `ax.plot`, etc. |
-| **seaborn** | `import seaborn`, `from seaborn` | `sns.lineplot`, `sns.heatmap`, `sns.pairplot`, etc. |
-| **plotly** | `import plotly`, `from plotly` | `px.scatter`, `px.line`, `go.Figure`, `fig.add_trace`, etc. |
+### Extraction Yield
+| Source | Items Processed | Snippets | Yield Rate |
+|--------|----------------|----------|------------|
+| Kaggle | 2,406 notebooks | 2,614 | 1.09/notebook |
+| StackOverflow | 324 questions | 605 | 1.87/question |
+| GitHub | 567 repos | 225 | 0.40/repo |
+| Galleries | 361 examples | 358 | 99.2% |
 
-## Output Format
+### Code Quality
+- **100% executable** — No syntax errors
+- **100% produce figures** — Verified output
+- **0% duplicates** — MD5 deduplication
+- **~11% captioned** — Galleries + some GitHub
 
-Each extracted code sample includes:
-- `code`: The Python visualization code
-- `caption`: Description/context (if available)
-- `library`: Detected visualization library (matplotlib, seaborn, plotly)
-- `file_id`: Unique identifier
-- `meta`: Source metadata (arxiv_id, repo, etc.)
+## 🎯 Use Cases
 
-## Requirements
+- **Text-to-visualization generation** — Train models to generate viz code
+- **Code completion** — Autocomplete for matplotlib/seaborn
+- **Documentation examples** — Real-world usage patterns
+- **Education** — Learn visualization best practices
+- **Benchmarking** — Test code generation models
 
+## 📝 Citation
+
+If you use this dataset, please cite:
+
+```bibtex
+@dataset{pyvec2024,
+  title={PYVEC: Python Visualization Executable Code Dataset},
+  author={Your Name},
+  year={2024},
+  url={https://github.com/saeedadeeb103/PYVEC_Dataset},
+  note={3,802 validated Python visualization snippets from Kaggle, StackOverflow, GitHub, and official galleries}
+}
 ```
-datasets
-tqdm
-nltk
-lxml
-beautifulsoup4
-httpx
-aiohttp
-openai
-requests
-```
 
-## Directory Structure for Data
+## 📄 License
 
-```
-datikz_pyviz/
-├── oai/                    # OAI resumption tokens
-├── tarballs/               # Cached ArXiv tarballs
-├── arxiv_extracted/        # Extracted ArXiv code
-├── github_tarballs/        # Cloned GitHub repos
-├── github_extracted/       # Extracted GitHub code
-├── loaders/
-│   └── github/
-│       ├── seen_repos.json
-│       ├── excluded_repos.json
-│       └── github_key.json
-├── raw/                    # Raw StackExchange dumps
-└── data/                   # Final processed data
-```
+Individual snippets retain their original licenses:
+- **Kaggle**: Apache 2.0 (Kaggle Terms)
+- **StackOverflow**: CC BY-SA 4.0
+- **GitHub**: Repository-specific licenses
+- **Galleries**: BSD-3-Clause (matplotlib), BSD-3-Clause (seaborn)
+
+This dataset compilation is provided for research and educational purposes.
+
+## 🤝 Contributing
+
+To add more snippets:
+1. Run the extractors as described above
+2. Validate new snippets are executable
+3. Merge into `all_validated_snippets.json`
+4. Submit a pull request
+
+## ⚠️ Notes
+
+- **API Keys Required:**
+  - Kaggle: `~/.kaggle/kaggle.json`
+  - GitHub: `GitHub/github_key.json`
+  - StackOverflow: No key needed (public API)
+
+- **Rate Limits:**
+  - Kaggle: ~200/hour (auto-retry)
+  - StackOverflow: 300/day (resume next day)
+  - GitHub: 5,000/hour per key (use multiple keys)
+  - Galleries: No limit
+
+- **Resumability:**
+  All extractors track progress and can be stopped/restarted without data loss
