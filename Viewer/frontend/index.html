@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyViz Code Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <style>
+        .code-container {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .image-container {
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        pre code {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .sample-card {
+            transition: all 0.2s ease;
+        }
+        .sample-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-white mb-2">PyViz Code Viewer</h1>
+            <p class="text-gray-400">Browse Python visualization code samples with rendered previews</p>
+            <div id="stats" class="mt-2 text-sm text-gray-500"></div>
+        </header>
+
+        <!-- Navigation -->
+        <div class="flex items-center gap-4 mb-6">
+            <button id="prevBtn" onclick="prevPage()" 
+                class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                ← Previous
+            </button>
+            <span id="pageInfo" class="text-gray-400">Page 1</span>
+            <button id="nextBtn" onclick="nextPage()" 
+                class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                Next →
+            </button>
+            <select id="pageSize" onchange="changePageSize()" 
+                class="ml-auto px-3 py-2 bg-gray-700 rounded-lg text-gray-200">
+                <option value="5">5 per page</option>
+                <option value="10" selected>10 per page</option>
+                <option value="20">20 per page</option>
+            </select>
+        </div>
+
+        <!-- Samples Container -->
+        <div id="samples" class="space-y-6"></div>
+
+        <!-- Loading indicator -->
+        <div id="loading" class="hidden flex justify-center py-8">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5001/api';
+        let currentOffset = 0;
+        let pageSize = 10;
+        let totalSamples = 0;
+
+        // Initialize
+        async function init() {
+            const countRes = await fetch(`${API_BASE}/count`);
+            const { count } = await countRes.json();
+            totalSamples = count;
+            document.getElementById('stats').textContent = `Total samples: ${count}`;
+            loadSamples();
+        }
+
+        async function loadSamples() {
+            const loading = document.getElementById('loading');
+            const container = document.getElementById('samples');
+            
+            loading.classList.remove('hidden');
+            container.innerHTML = '';
+
+            try {
+                const res = await fetch(`${API_BASE}/samples?offset=${currentOffset}&limit=${pageSize}`);
+                const data = await res.json();
+                
+                for (const sample of data.samples) {
+                    container.appendChild(createSampleCard(sample));
+                }
+
+                updateNavigation();
+                hljs.highlightAll();
+            } catch (error) {
+                container.innerHTML = `<div class="text-red-400 p-4">Error loading samples: ${error.message}</div>`;
+            } finally {
+                loading.classList.add('hidden');
+            }
+        }
+
+        function createSampleCard(sample) {
+            const card = document.createElement('div');
+            card.className = 'sample-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700';
+            
+            card.innerHTML = `
+                <div class="p-4 bg-gray-750 border-b border-gray-700 flex items-center justify-between">
+                    <div>
+                        <span class="text-lg font-semibold text-white">Sample #${sample.id}</span>
+                        <span class="ml-3 px-2 py-1 text-xs rounded-full bg-blue-600 text-white">${sample.library || 'unknown'}</span>
+                    </div>
+                    <span class="text-xs text-gray-500">${sample.file_id}</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                    <!-- Code Panel -->
+                    <div class="code-container border-r border-gray-700 bg-gray-900">
+                        <pre class="m-0"><code class="language-python">${escapeHtml(sample.code)}</code></pre>
+                    </div>
+                    <!-- Image Panel -->
+                    <div class="image-container bg-gray-850 p-4" id="image-${sample.id}">
+                        <button onclick="renderSample(${sample.id})" 
+                            class="px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition">
+                            🎨 Render Plot
+                        </button>
+                    </div>
+                </div>
+                ${sample.caption ? `<div class="p-3 bg-gray-750 border-t border-gray-700 text-sm text-gray-400">${escapeHtml(sample.caption)}</div>` : ''}
+            `;
+            
+            return card;
+        }
+
+        async function renderSample(sampleId) {
+            const container = document.getElementById(`image-${sampleId}`);
+            container.innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const res = await fetch(`${API_BASE}/render/${sampleId}`);
+                const data = await res.json();
+
+                if (data.error) {
+                    container.innerHTML = `
+                        <div class="text-center p-4">
+                            <div class="text-red-400 mb-2">❌ Render Failed</div>
+                            <div class="text-xs text-gray-500">${escapeHtml(data.details || data.error)}</div>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <img src="data:image/png;base64,${data.image}" 
+                             alt="Rendered plot" 
+                             class="max-w-full max-h-[70vh] rounded-lg shadow-lg">
+                        ${data.cached ? '<div class="absolute top-2 right-2 text-xs text-gray-500">cached</div>' : ''}
+                    `;
+                }
+            } catch (error) {
+                container.innerHTML = `
+                    <div class="text-red-400 p-4">Error: ${error.message}</div>
+                `;
+            }
+        }
+
+        function updateNavigation() {
+            const currentPage = Math.floor(currentOffset / pageSize) + 1;
+            const totalPages = Math.ceil(totalSamples / pageSize);
+            
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('prevBtn').disabled = currentOffset === 0;
+            document.getElementById('nextBtn').disabled = currentOffset + pageSize >= totalSamples;
+        }
+
+        function prevPage() {
+            if (currentOffset > 0) {
+                currentOffset = Math.max(0, currentOffset - pageSize);
+                loadSamples();
+            }
+        }
+
+        function nextPage() {
+            if (currentOffset + pageSize < totalSamples) {
+                currentOffset += pageSize;
+                loadSamples();
+            }
+        }
+
+        function changePageSize() {
+            pageSize = parseInt(document.getElementById('pageSize').value);
+            currentOffset = 0;
+            loadSamples();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>

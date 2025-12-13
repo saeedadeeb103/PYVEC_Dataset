@@ -1,0 +1,1577 @@
+[
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport seaborn as sns\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\ndf = sns.load_dataset(\"titanic\")\nplt.show()\n#### sayısal değişken görselleştirme.....\nplt.hist(df[\"age\"])\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_0"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([1, 8])\ny = np.array([0, 150])\nplt.plot(x, y, 'o')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_1"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([1, 8, 9, 10, 11, 13])\ny = np.array([1, 3, 5, 6, 8, 12])\nplt.plot(x, y, 'o')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_2"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ny = np.array([1, 3, 5, 6, 8, 12])\nplt.plot(y, marker='*')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_3"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ny = np.array([1, 3, 5, 6, 8, 12])\nplt.plot(y, linestyle=\"dashdot\", color='red')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_4"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx= np.array([1, 8, 9, 10, 11, 13])\ny = np.array([1, 3, 5, 6, 8, 12])\nplt.plot(x)\nplt.plot(y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_5"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([1, 8, 9, 10, 11, 13])\ny = np.array([1, 3, 5, 6, 8, 12])\nplt.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_6"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\n# x ve y verilerini tanımlayın\n# Çizgi grafiği oluştur\nplt.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_7"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nplt.show()\n#### Başlık\nplt.title(\"Bu ana başlık\")\n### X eksenini isimlendirme\nplt.xlabel(\"x ekseni isimlendirmesi\")\nplt.ylabel(\"y ekseni isimlendirmesi\")\nplt.grid()\nplt.show()\n#### Subplots..\nx = np.array([80, 100, 110, 115, 120, 140, 155])\ny = np.array([180, 200, 250, 315, 320, 340, 400])\nplt.subplot(1, 2, 1)   # 1'e 2 lik grafiğin 1.sini ver .\nplt.title(\"1\")\nplt.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_8"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([80, 100, 110, 115, 120, 140, 155])\ny = np.array([180, 200, 250, 315, 320, 340, 400])\nplt.subplot(1, 2, 2)  ### bu da 1'e 2 lil grafiğin 2sini ver\nplt.title(\"2\")\nplt.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_9"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.random.randint(0, 250, 10)\ny = np.random.randint(200, 400, 10)\n### yaygın olabilecek seaborn modülleri\nimport pandas as pd\nimport seaborn as sns\nfrom matplotlib import pyplot as plt\ndf = sns.load_dataset(\"tips\")\n#### 2 adet kategorik değişkenlerimiz var....\n#### kadın erkek sigara içiyor içmiyor string formatında olanlar...\nsns.countplot(x=df[\"sex\"], data=df)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Erdincuzunlu/matplotlib-seaborn-tutorial",
+    "file_id": "gh_Erdincuzunlu_matplotlib-seaborn-tutorial_10"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([3, 8, 1, 10])\r\nplt.subplot(1, 2, 1) # 1 row, 2 columns, first plot\r\nplt.plot(x,y)\r\nplt.title(\"First plot\") # title of the first plot\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_11"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([10, 20, 30, 40])\r\nplt.subplot(1, 2, 2) # 1 row, 2 columns, second plot\r\nplt.plot(x,y)\r\nplt.title(\"Second plot\")\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_12"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nplt.suptitle(\"My example:\") # this will add a single title to the whole image\r\nplt.show()\r\n# example of 6 plots\r\nx = np.array([0, 1, 2, 3])\r\ny = np.array([3, 8, 1, 10])\r\nplt.subplot(2, 3, 1)\r\nplt.plot(x,y)\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_13"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([10, 20, 30, 40])\r\nplt.subplot(2, 3, 2)\r\nplt.plot(x,y)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_14"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([3, 8, 1, 10])\r\nplt.subplot(2, 3, 3)\r\nplt.plot(x,y)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_15"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([10, 20, 30, 40])\r\nplt.subplot(2, 3, 4)\r\nplt.plot(x,y)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_16"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([3, 8, 1, 10])\r\nplt.subplot(2, 3, 5)\r\nplt.plot(x,y)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_17"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\r\ny = np.array([10, 20, 30, 40])\r\nplt.subplot(2, 3, 6)\r\nplt.plot(x,y)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_18"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nplt.show() \r\n# scatter()\r\nx = np.array([4,7,12,7,6])\r\ny = np.array([102,94,14,245,195])\r\nplt.scatter(x, y)\r\nplt.show()\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_19"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([4,7,12,7,6])\r\ny = np.array([102,94,14,145,195])\r\nplt.scatter(x, y, color = '#88c999')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_20"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([1,2,7,12,7])\r\ny = np.array([105,94,16,135,99])\r\nplt.scatter(x, y, color = 'blue')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_21"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nplt.show()\r\n# Change the size of the markers\r\nx = np.array([4,7,12,7,6])\r\ny = np.array([102,94,14,145,195])\r\nsizes = np.array([10,20,55,14,8])\r\nplt.scatter(x, y, s=sizes, alpha=0.5) # alpha will change the transparency of the markers\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_22"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nplt.show()\r\n# ColorMap\r\nx = np.array([4,7,12,7,6])\r\ny = np.array([102,94,14,145,195])\r\ncolors = np.array([0,10,20,30,40]) # create a color array \r\nplt.scatter(x, y, c=colors, cmap='seismic') # search the official documentation for all the different colormap styles \r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_23"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.random.normal(125, 8, 247)\r\nplt.hist(x)\r\nplt.show()\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/talescolman/Data-Science-Pandas-Matplotlib",
+    "file_id": "gh_talescolman_Data-Science-Pandas-Matplotlib_24"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nplt.scatter(x,y, color='red', s=10)\nplt.title(\"Scatter plot example\")\nplt.xlabel(\"X-Axis\")\nplt.ylabel(\"Y-Axis\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/arrayblogcode/matplotlib-tutorial-codes",
+    "file_id": "gh_arrayblogcode_matplotlib-tutorial-codes_25"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nplt.plot([], [], color='m', label='Sleeping')\nplt.plot([], [], color='c', label='Eating')\nplt.plot([], [], color='r', label='Working')\nplt.plot([], [], color='k', label='Playing')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Patrickskiba/MatplotlibTutorialExamples",
+    "file_id": "gh_Patrickskiba_MatplotlibTutorialExamples_26"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nplt.scatter(x,y,label='skitscat', color='blue', marker='x')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Patrickskiba/MatplotlibTutorialExamples",
+    "file_id": "gh_Patrickskiba_MatplotlibTutorialExamples_27"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nimport csv\nplt.plot(x, y, label=\"Loaded from file!\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Patrickskiba/MatplotlibTutorialExamples",
+    "file_id": "gh_Patrickskiba_MatplotlibTutorialExamples_28"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n# evenly sampled time at 200ms intervals\nt = np.arange(0., 5., 0.2)\n# red dashes, blue squares and green triangles\nplt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/jdgwartney/matplotlib-tutorial",
+    "file_id": "gh_jdgwartney_matplotlib-tutorial_29"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nplt.plot([1,2,3,4])\nplt.ylabel('some numbers')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/jdgwartney/matplotlib-tutorial",
+    "file_id": "gh_jdgwartney_matplotlib-tutorial_30"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nplt.plot([1,2,3,4], [1,4,9,16], 'ro')\nplt.axis([0, 6, 0, 20])\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/jdgwartney/matplotlib-tutorial",
+    "file_id": "gh_jdgwartney_matplotlib-tutorial_31"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nX = np.linspace(-np.pi, np.pi, 256, endpoint=True)\nC,S = np.cos(X), np.sin(X)\nplt.plot(X,C)\nplt.plot(X,S)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/jdgwartney/matplotlib-tutorial",
+    "file_id": "gh_jdgwartney_matplotlib-tutorial_32"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom matplotlib import animation\nfig,ax = plt.subplots()\nx = np.arange(0,2*np.pi,0.01)\nline, = ax.plot(x,np.sin(x))\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/3riccc/matplotlib_learn",
+    "file_id": "gh_3riccc_matplotlib_learn_33"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom matplotlib import animation\n# First set up the figure, the axis, and the plot element we want to animate\nfig = plt.figure()\nax = plt.axes(xlim=(0, 2), ylim=(-2, 2))\nline, = ax.plot([], [], lw=2)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/jakevdp/matplotlib_pydata2013",
+    "file_id": "gh_jakevdp_matplotlib_pydata2013_34"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nfrom matplotlib import pyplot as plt\nfrom matplotlib.widgets import Slider, AxesWidget\nfrom matplotlib.colors import rgb2hex\nim_arr = np.zeros((256, 256, 3), dtype=np.float32)\nim_arr[:, :, 0] = np.linspace(0, 1, 256)\nim_arr[:, :, 1] = np.linspace(0, 1, 256)[:, np.newaxis]\nfig = plt.figure(figsize=(8, 8))\nmain_ax = plt.axes([0.1, 0.15, 0.8, 0.8], xticks=[], yticks=[])\nslider_ax = plt.axes([0.1, 0.1, 0.8, 0.02])\ncbox_ax = plt.axes([0.1, 0.04, 0.04, 0.04], xticks=[], yticks=[])\nim = main_ax.imshow(im_arr, extent=[0, 1, 0, 1], picker=True)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/jakevdp/matplotlib_pydata2013",
+    "file_id": "gh_jakevdp_matplotlib_pydata2013_35"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n    # capture the last event\nth = np.linspace(0, 2*np.pi, 64)\nfig, ax = plt.subplots()\n# the `picker=5` kwarg turn on pick-events for this artist\nax.plot(th, np.sin(th), 'o-', picker=5)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/matplotlib/interactive_tutorial",
+    "file_id": "gh_matplotlib_interactive_tutorial_36"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom collections import deque\nimport matplotlib as mpl\nimport matplotlib.pyplot as plt\nimport numpy as np\nplt.ion()\n# disable the built in key bindings\nfig, ax = plt.subplots()\nth = np.linspace(0, 2*np.pi, 64)\nln, = ax.plot(th, np.sin(th), 'o-', picker=5)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/matplotlib/interactive_tutorial",
+    "file_id": "gh_matplotlib_interactive_tutorial_37"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.linspace(1, 13, 500)\ny = 1 + np.sinc(x - 7)\n# Set axis limits.\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.set_xlim(4, 10)\nax.set_ylim(-1, 3)\nax.set_xlabel(\"x-axis limits set at 4 and 10\", fontsize=16)\nax.set_ylabel(\"y-axis limits set at -1 and 3\", fontsize=16)\nfig.savefig(\"images/axis_limits.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_38"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.set_xscale(\"log\")\nax.set_yscale(\"log\")\nax.set_xlabel(\"log scale x-axis\", fontsize=16)\nax.set_ylabel(\"log scale y-axis\", fontsize=16)\nfig.savefig(\"images/axis_log.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_39"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.tick_params(axis=\"x\", direction=\"in\")\nax.tick_params(axis=\"y\", direction=\"inout\")\nax.set_xlabel(\"inward x-axis ticks\", fontsize=16)\nax.set_ylabel(\"bi-directional y-axis ticks\", fontsize=16)\nfig.savefig(\"images/axis_tick_direction.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_40"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.tick_params(bottom=False, top=True, left=True, right=True)\nax.tick_params(labelbottom=False, labeltop=True, labelleft=True, labelright=True)\nax.set_xlabel(\"x-axis ticks on top\", fontsize=16)\nax.set_ylabel(\"y-axis ticks on both sides\", fontsize=16)\nfig.savefig(\"images/axis_tick_opposite.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_41"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.tick_params(axis=\"x\", direction=\"in\", length=16, width=2, color=\"turquoise\")\nax.tick_params(axis=\"y\", direction=\"in\", length=6, width=4, color=\"orange\")\nax.set_xlabel(\"long turquoise x-axis ticks\", fontsize=16)\nax.set_ylabel(\"short orange y-axis ticks\", fontsize=16)\nfig.savefig(\"images/axis_tick_styled.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_42"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.tick_params(axis=\"x\", labelsize=18, labelrotation=-60, labelcolor=\"turquoise\")\nax.tick_params(axis=\"y\", labelsize=12, labelrotation=20, labelcolor=\"orange\")\nax.set_xlabel(\"big turquoise x-axis ticks\", fontsize=16)\nax.set_ylabel(\"small orange y-axis ticks\", fontsize=16)\nfig.savefig(\"images/axis_tick_label_styled.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_43"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\n# Create the curve data.\nx = np.linspace(-6, 6, 500)\ny = np.sinc(x)\n# Add axis labels and a title.\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.set_xlabel(\"The x-axis label\", fontsize=16)\nax.set_ylabel(\"The y-axis label\", fontsize=16)\nax.set_title(\"The Title\", fontsize=18)\nfig.savefig(\"images/text_xy_labels_title.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_44"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nax.text(-5, .8, \"Some text\", fontsize=22)\nfig.savefig(\"images/text_any_text.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_45"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\n# Create the point data.\nx = np.linspace(-1, 1)\ny = x + np.random.normal(size=x.size)\n# Vary the marker size.\nfig = plt.figure()\nax = fig.gca()\nax.scatter(x, y, s=80)\nfig.savefig(\"images/markers_large.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_46"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nsizes = (np.random.sample(size=x.size) * 10) ** 2\nax.scatter(x, y, s=sizes)\nfig.savefig(\"images/markers_sized.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_47"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.scatter(x, y, marker=\"v\")\nfig.savefig(\"images/markers_triangle.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_48"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.scatter(x, y, c=\"orange\")\nfig.savefig(\"images/markers_orange.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_49"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.scatter(x, y, c=x - y)\nfig.savefig(\"images/markers_colors.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_50"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\n# Create the curve data.\nx = np.linspace(-6, 6, 500)\ny = np.sinc(x)\n# Vary the line width.\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y, linewidth=15)\nfig.savefig(\"images/wide_line.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_51"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y, color=\"pink\", linewidth=5)\nfig.savefig(\"images/pink_line.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_52"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y, linewidth=2, linestyle=\"--\")\nfig.savefig(\"images/dashed_line.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_53"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y, linewidth=4)\nax.plot(x, y + .1, linewidth=2)\nax.plot(x, y + .2, linewidth=1)\nax.plot(x, y + .3, linewidth=.5)\nax.plot(x, y + .4, linewidth=.2)\nfig.savefig(\"images/multiple_lines.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_54"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx_curve = np.linspace(-2 * np.pi, 2 * np.pi, 500)\ny_curve = np.sinc(x_curve)\nplt.figure()\nplt.plot(x_curve, y_curve)\nplt.savefig(\"images/line_plot.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_55"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx_scatter = np.linspace(-1, 1)\ny_scatter = x_scatter + np.random.normal(size=x_scatter.size)\nplt.figure()\nplt.scatter(x_scatter, y_scatter)\nplt.savefig(\"images/scatter_plot.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_56"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.linspace(-6, 6, 500)\ny = np.sinc(x)\n# Manually set Axes by size and position.\nfig = plt.figure()\nax = fig.add_axes((.2, .4, .4, .4))\nax.plot(x, y)\nfig.savefig(\"images/framing_manual.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_57"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax1 = fig.add_axes((.1, .1, .35, .35))\nax2 = fig.add_axes((.1, .6, .35, .35))\nax3 = fig.add_axes((.55, .1, .35, .35))\nax4 = fig.add_axes((.55, .6, .35, .35))\nax5 = fig.add_axes((.35, .83, .08, .08))\nax6 = fig.add_axes((.75, .43, .23, .23))\nax7 = fig.add_axes((.35, -.15, .3, .3))\nfig.savefig(\"images/framing_multiple.png\")\n# Fill figure with Axes.\nfig = plt.figure()\nax1 = fig.add_axes((0, 0, 1, 1))\nfig.savefig(\"images/framing_no_border.png\")\n# https://matplotlib.org/api/spines_api.html\n# Turn axis spines off.\nfig = plt.figure()\nax = fig.gca()\nax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False)\nax.spines['left'].set_visible(False)\nax.plot(x, y)\nfig.savefig(\"images/framing_spines_off.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_58"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.spines['top'].set_color(\"orange\")\nax.spines['left'].set_bounds(-.5, .5)\nax.spines['right'].set_linestyle(\"--\")\nax.spines['bottom'].set_linewidth(6)\nax.spines['bottom'].set_capstyle(\"round\")\nax.plot(x, y)\nfig.savefig(\"images/framing_spines_styled.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_59"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.spines['top'].set_position((\"outward\", 15))\nax.spines['bottom'].set_position((\"data\", 0))\nax.spines['left'].set_position((\"axes\", .3))\nax.spines['right'].set_position((\"outward\", -40))\nax.plot(x, y)\nfig.savefig(\"images/framing_spines_moved.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_60"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure(figsize=(4, 2))\nax = fig.gca()\nax.plot(x, y)\nfig.savefig(\"images/framing_small_fig.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_61"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.plot(x, y)\nfig.savefig(\"images/framing_lo_res_fig.png\", dpi=15)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_62"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nfig = plt.figure()\nax = fig.gca()\nax.set_facecolor(\"#e1ddbf\")\nax.plot(x, y)\nfig.savefig(\"images/framing_axes_bg_color.png\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_63"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib\nimport numpy as np\nfig = plt.figure()\nax = fig.gca()\nx = np.linspace(-6, 6, 500)\ny = np.sinc(x)\nax.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/brohrer/taming_matplotlib",
+    "file_id": "gh_brohrer_taming_matplotlib_64"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nplt.show()\r\n# You need to close the figure for the 2nd half of the script to run - remove the plotting above if you want to generate without intervention.\r\nfig = plt.figure()\r\nplt.xlim(-10, 10)\r\nplt.ylim(-10, 10)\r\nlPnt, = plt.plot([], [], 'o')\r\nl, = plt.plot([], [], 'k-', linewidth=3)\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/codinglikemad/pyAnimTutorial",
+    "file_id": "gh_codinglikemad_pyAnimTutorial_65"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport matplotlib\r\nimport matplotlib.pyplot as plt\r\nfrom matplotlib.animation import FFMpegWriter\r\n# This needs to be changed for your code\r\nplt.rcParams['animation.ffmpeg_path'] = 'C:\\\\Users\\\\spsha\\\\Desktop\\\\ffmpeg-4.4-full_build\\\\bin\\\\ffmpeg.exe'\r\n# This is the final example I showed in the code - notice I have 2 \"cursor marks\" not shown in the video\r\nfig = plt.figure()\r\nl, = plt.plot([], [], 'k-')\r\nl2, = plt.plot([], [], 'm--')\r\np1, = plt.plot([], [], 'ko')\r\np2, = plt.plot([], [], 'mo')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/codinglikemad/pyAnimTutorial",
+    "file_id": "gh_codinglikemad_pyAnimTutorial_66"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_stacked_simple():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n\n    plt.bar(year, tutorial_public, color=\"#6c3376\")\n    plt.bar(year, tutorial_premium, bottom=tutorial_public, color=\"#f3e151\")\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_stacked_simple()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_67"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_stacked_reversed():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n\n    plt.bar(year, tutorial_premium, color=\"#f3e151\")\n    plt.bar(year, tutorial_public, bottom=tutorial_premium, color=\"#6c3376\")\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_stacked_reversed()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_68"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_stacked_horizontal():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n\n    plt.barh(year, tutorial_premium, color=\"#f3e151\")\n    # notice bottom became left\n    plt.barh(year, tutorial_public, left=tutorial_premium, color=\"#6c3376\")\n\n    plt.xlabel('Number of futurestud.io Tutorials')\n    plt.ylabel('Year')\n\n    plt.show()\n\n\nbarplot_stacked_horizontal()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_69"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_simple():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n    plt.bar(year, tutorial_count)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_simple()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_70"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_color():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n    plt.bar(year, tutorial_count, color=\"#6c3376\")\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_color()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_71"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_color2():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n    plt.bar(year, tutorial_count, color=\"#6c3376\", edgecolor=\"#409240\", linewidth=2)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_color2()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_72"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_color3():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n\n    plt.bar(year[:-1], tutorial_count[:-1], color=\"#6c3376\")\n    plt.bar(year[-1], tutorial_count[-1], color=\"#6c3376\", edgecolor=\"#409240\", linewidth=2)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_color3()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_73"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef barplot_horizontal():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n\n    plt.barh(year[:-1], tutorial_count[:-1], color=\"#6c3376\")\n    plt.barh(year[-1], tutorial_count[-1], color=\"#6c3376\", edgecolor=\"#409240\", linewidth=2)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nbarplot_horizontal()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_74"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef lineplot_simple():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n    plt.plot(year, tutorial_count)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nlineplot_simple()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_75"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef lineplot_color():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_count = [39, 117, 111, 110, 67, 29]\n    plt.plot(year, tutorial_count, color=\"#6c3376\", linewidth=3)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nlineplot_color()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_76"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef lineplot_color2():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n    plt.plot(year, tutorial_public, color=\"#6c3376\", linewidth=3)\n    plt.plot(year, tutorial_premium, color=\"#f3e151\", linewidth=3)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nlineplot_color2()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_77"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef simple_plot():\n    x = [0, 1, 2, 3, 4]\n    y = [0, 1, 4, 9, 16]\n\n    plt.plot(x, y)\n    plt.show()\n\n\nsimple_plot()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_78"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef scatter_plot():\n    x = [0, 1, 2, 5, 8]\n    y = [1, 4, 3, 2, 5]\n    plt.scatter(x, y)\n    plt.show()\n\n\nscatter_plot()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_79"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef scatter_plot_custom_design():\n    x = [0, 1, 2, 5, 8]\n    y = [1, 4, 3, 2, 5]\n    plt.scatter(x, y, color='red')\n    plt.show()\n\n    x = [0, 1, 2, 5, 8]\n    y = [1, 4, 3, 2, 5]\n    plt.scatter(x, y, color='red', marker='^')\n    plt.show()\n\n\nscatter_plot_custom_design()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_80"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\ndef scatter_plot_labels():\n    x = [0, 1, 2, 5, 8]\n    y = [1, 4, 3, 2, 5]\n    plt.scatter(x, y, color='red', marker='^')\n    plt.xlabel('X Axis Label')\n    plt.ylabel('Y Axis Label')\n    plt.show()\n\n\nscatter_plot_labels()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_81"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\ndef scatter_plot_limits():\n    x = [0, 1, 2, 5, 8]\n    y = [1, 4, 3, 2, 5]\n    plt.scatter(x, y, color='red', marker='^')\n    plt.xlabel('X Axis Label')\n    plt.ylabel('Y Axis Label')\n    plt.ylim(0)\n    plt.show()\n\n\nscatter_plot_limits()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_82"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef labels_simple():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n    plt.plot(year, tutorial_public, color=\"#6c3376\", linewidth=3)\n    plt.plot(year, tutorial_premium, color=\"#f3e151\", linewidth=3)\n\n    plt.xlabel('Year')\n    plt.ylabel('Number of futurestud.io Tutorials')\n\n    plt.show()\n\n\nlabels_simple()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_83"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef labels_font():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n    plt.plot(year, tutorial_public, color=\"#6c3376\", linewidth=3)\n    plt.plot(year, tutorial_premium, color=\"#f3e151\", linewidth=3)\n\n    plt.xlabel('Year', color='blue', family='serif', fontsize=50)\n    plt.ylabel('Number of futurestud.io Tutorials', fontsize='small')\n\n    plt.show()\n\n\nlabels_font()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_84"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef labels_background():\n    year = [2014, 2015, 2016, 2017, 2018, 2019]\n    tutorial_public = [39, 117, 98, 54, 28, 15]\n    tutorial_premium = [0, 0, 13, 56, 39, 14]\n    plt.plot(year, tutorial_public, color=\"#6c3376\", linewidth=3)\n    plt.plot(year, tutorial_premium, color=\"#f3e151\", linewidth=3)\n\n    plt.xlabel('Year', color='blue', family='serif', fontsize=50)\n    plt.ylabel('Number of futurestud.io Tutorials', backgroundcolor='red', fontsize='small')\n\n    plt.show()\n\n\nlabels_background()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/futurestudio/matplotlib-tutorials",
+    "file_id": "gh_futurestudio_matplotlib-tutorials_85"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt;\nimport numpy as np;\n# 构建X方向的值, 1.初始值 2.结束值 3.分成多少份\nX = np.linspace(-2*np.pi,2*np.pi);\n# 构建Y方向的值\nY = np.sin(X);\n# 绘制直线, X ,Y 的坐标点\nplt.plot(X,Y);\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/xiaokaijun/Matplotlib_Tutorials",
+    "file_id": "gh_xiaokaijun_Matplotlib_Tutorials_86"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt;\nimport numpy as np;\n# 构建X方向的值, 1.初始值 2.结束值 3.分成多少份\nX = np.linspace(-np.pi,np.pi,100,endpoint=True);\n# 构建Y方向的值\nSY = np.sin(X);\nCY = np.cos(X);\n# 绘制直线, X ,Y 的坐标点\nplt.plot(X,SY,color=\"red\",linewidth=2.0);\nplt.plot(X,CY,color=\"blue\",linewidth=2.0,linestyle=\"-\");\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/xiaokaijun/Matplotlib_Tutorials",
+    "file_id": "gh_xiaokaijun_Matplotlib_Tutorials_87"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt;\nimport numpy as np;\n# 构建X方向的值, 1.初始值 2.结束值 3.分成多少份\nX = np.linspace(-np.pi,np.pi,100,endpoint=True);\n# 构建Y方向的值\nSY = np.sin(X);\nCY = np.cos(X);\n# 绘制直线, X ,Y 的坐标点     # 增加图例显示\n# 注意l1,后面的逗号，表示取列表中的第1个位置\nl1,= plt.plot(X,SY,color=\"red\",linewidth=2.0,label=\"sin(x)\");\nl2,= plt.plot(X,CY,color=\"blue\",linewidth=2.0,linestyle=\"-\" ,label=\"cos(x)\");\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/xiaokaijun/Matplotlib_Tutorials",
+    "file_id": "gh_xiaokaijun_Matplotlib_Tutorials_88"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nplt.scatter(x, y, color='green', marker='x')  # Create scatter plot with green 'x' markers\nplt.title('Scatter Plot')  # Title\nplt.xlabel('X values')  # Label X-axis\nplt.ylabel('Y values')  # Label Y-axis\nplt.grid(True)  # Show grid\nplt.show()  # Display plot",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/rajnishraj3301/Matplotlib-Tutorial",
+    "file_id": "gh_rajnishraj3301_Matplotlib-Tutorial_89"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt  # Importing the pyplot module from matplotlib and aliasing it as plt\nplt.plot(x, y)  # Create a line plot with x and y\nplt.title('Basic Line Plot')  # Set the title of the plot\nplt.xlabel('X-axis')  # Label for X-axis\nplt.ylabel('Y-axis')  # Label for Y-axis\nplt.grid(True)  # Add a grid to the plot\nplt.show()  # Display the plot",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/rajnishraj3301/Matplotlib-Tutorial",
+    "file_id": "gh_rajnishraj3301_Matplotlib-Tutorial_90"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport numpy as np  # Import numpy for generating data\nimport matplotlib.pyplot as plt\ndata = np.random.randn(1000)  # Generate 1000 random numbers (normal distribution)\nplt.hist(data, bins=30, color='purple', edgecolor='black')  # Create histogram with 30 bins\nplt.title('Histogram of Random Data')  # Title\nplt.xlabel('Value')  # X-axis label\nplt.ylabel('Frequency')  # Y-axis label\nplt.show()  # Show plot",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/rajnishraj3301/Matplotlib-Tutorial",
+    "file_id": "gh_rajnishraj3301_Matplotlib-Tutorial_91"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt  \nplt.plot(x, y, color='red', linewidth=2, linestyle='--', marker='o')  # Customize line color, width, style, and markers\nplt.title('Customized Line Plot')  # Set title\nplt.xlabel('X')  # Label X-axis\nplt.ylabel('Y = X^2')  # Label Y-axis\nplt.show()  # Show the plot",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/rajnishraj3301/Matplotlib-Tutorial",
+    "file_id": "gh_rajnishraj3301_Matplotlib-Tutorial_92"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\ndata = [np.random.normal(0, std, 100) for std in range(1, 4)]  # Create 3 groups of normally distributed data\nplt.boxplot(data)  # Create box plot\nplt.title('Box Plot Example')  # Title\nplt.xlabel('Group')  # Label X-axis\nplt.ylabel('Values')  # Label Y-axis\nplt.show()  # Show plot",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/rajnishraj3301/Matplotlib-Tutorial",
+    "file_id": "gh_rajnishraj3301_Matplotlib-Tutorial_93"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nmatrix = np.random.rand(5, 5)  # Create a 5x5 matrix of random numbers\nplt.imshow(matrix, cmap='hot', interpolation='nearest')  # Display matrix as a heatmap\nplt.colorbar()  # Add color bar to explain scale\nplt.title('Heatmap')  # Title\nplt.show()  # Display heatmap",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/rajnishraj3301/Matplotlib-Tutorial",
+    "file_id": "gh_rajnishraj3301_Matplotlib-Tutorial_94"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef plot():#plot趋势\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.cos(x)\n    y1 = np.random.randn(100)# 标准正态分布取100个\n\n\n\n    plt.plot(x,y,ls=\"-\",lw = 2,label = \"plot figure\")#linestyle中，-是连续的曲线，:是点，-.是点加线，--是中间空的线\n    plt.legend()\n    plt.show()\n\n\nplot()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_95"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef scatter():#变量间关系\n    x = np.linspace(0.5,100,1000)#a,b均匀取100个数\n    y = np.random.randn(1000)\n    plt.scatter(x,y,label = \"scatter figure\")#变量间关系\n    plt.legend()\n    plt.show()\n\n\nscatter()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_96"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef xlim():#x轴显示范围\n    x = np.linspace(0.5,100,1000)#a,b均匀取100个数\n    y = np.random.randn(1000)\n    plt.scatter(x,y,label = \"scatter figure\")#变量间关系\n\n    plt.legend()\n\n    plt.xlim(0.05,100)\n    plt.ylim(0.05,1)\n    plt.show()\n\n\nxlim()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_97"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef xlabel():#xy标签\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.cos(x)\n\n    plt.plot(x,y,ls=\"-.\",lw = 2,c=\"g\",label = \"plot figure\")#plot趋势\n    plt.legend()\n\n    plt.xlabel(\"x  x\")\n    plt.ylabel(\"y  y\")\n\n\n    plt.show()\n\n\nxlabel()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_98"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef grid():#绘制刻度线\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.sin(x)\n\n\n\n\n    plt.plot(x,y,ls=\"-.\",lw = 2,c = \"b\",label = \"plot figure\")\n    plt.legend()\n\n    plt.grid(linestyle=\":\",color = \"r\")\n    plt.show()\n\n\ngrid()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_99"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef axhline():#平行于x的参考线,xvhline反之\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.sin(x)\n\n    plt.plot(x,y,ls=\"-\",lw = 2,c = \"b\",label = \"plot figure\")\n    plt.legend()\n\n    plt.axhline(y = 0.0,c=\"r\",ls = \"--\",lw = 2)\n    plt.axvline(x = 4.0,c=\"r\",ls = \"-.\",lw = 2)\n\n    plt.show()\n\n\naxhline()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_100"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef axvspan():#垂直于x的参考区域\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.sin(x)\n    plt.plot(x,y,ls=\"-\",lw = 2,c = \"b\",label = \"plot figure\")\n    plt.legend()\n\n    plt.axhspan(ymin = 0.0,ymax = 0.5,facecolor = \"y\",alpha = 0.3)\n    plt.axvspan(xmin = 4.0,xmax = 6.0,facecolor = \"y\",alpha = 0.3)\n\n    plt.show()\n\n\naxvspan()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_101"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef annotate():#内部细节指向\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.sin(x)\n\n    plt.plot(x,y,ls=\"-.\",lw = 2,c=\"g\",label = \"plot figure\")#plot趋势\n    plt.legend()\n\n    plt.annotate(\"max\",xy = (np.pi/2,1.0),xytext=((np.pi/2)+1,.8),c =\"b\",arrowprops=\n                 dict(facecolor='black', shrink=0.05))\n    '''\n    xy=(横坐标，纵坐标)  箭头尖端\n    xytext=(横坐标，纵坐标) 文字的坐标，指的是最左边的坐标\n    arrowprops= {\n        facecolor= '颜色',\n        shrink = '数字' <1  收缩箭头\n    }\n'''\n\n\n\n    #plt.annotate('local max', xy=(2,1), xytext=(3,1.5),\n     #       arrowprops=dict(facecolor='black', shrink=0.05))\n\n    plt.show()\n\n\nannotate()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_102"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef text():#无指向形注释\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.sin(x)\n\n    plt.plot(x,y,ls=\"-.\",lw = 2,c=\"g\",label = \"plot figure\")#plot趋势\n    plt.legend()\n\n    plt.text(3.10,0.09,\"y = sin(x)\",weight=\"bold\",color=\"b\")\n    plt.show()\n\n\ntext()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_103"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef title():#标题的使用\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.cos(x)\n\n    plt.plot(x,y,ls=\"-.\",lw = 2,c=\"g\",label = \"plot figure\")#plot趋势\n    plt.legend()\n    plt.title(\"y=cos(x)\")\n    plt.show()\n\n\ntitle()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_104"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef legend():#可以改变文本图标的位置\n    x = np.linspace(0.5,10,1000)#a,b均匀取100个数\n    y = np.cos(x)\n\n    plt.plot(x,y,ls=\"-.\",lw = 2,c=\"g\",label = \"plot figure\")#plot趋势\n    plt.legend(loc = \"lower left\")\n    plt.show()\n\n\nlegend()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Adancurusul/Matplotlib_basic_tutorial",
+    "file_id": "gh_Adancurusul_Matplotlib_basic_tutorial_105"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport matplotlib\n# 方法一------------改变的是绘制的全局字体\n# pyplot并不默认支持中文显示，需要rcParams修改字体实现\nplt.plot([3, 1, 4, 5, 2])\nplt.ylabel('纵轴(值)')\nplt.savefig('test', dpi=600)\nplt.show()\n# rcParams的属性:'font.family'用于显示字体的名字，'font.style'字体风格，正常normal或斜体italic，'font.size'字体大小整数字号或者large，x-small\n# 中文字体说明:SimHei中文黑体,Kaiti中文楷体，Lisu中文隶书，FangSong中文仿宋，YouYuan中文幼圆，STSong华文宋体",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_106"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\na = np.arange(0.0, 5.0, 0.02)\nplt.xlabel('横轴:时间')\nplt.ylabel('纵轴：振幅')\nplt.plot(a, np.cos(2 * np.pi * a), 'r--')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_107"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\na = np.arange(0.0, 5.0, 0.02)\nplt.xlabel('横轴：时间', fontproperties='SimHei', fontsize=15)\nplt.ylabel('纵轴：振幅', fontproperties='SimHei', fontsize=15)\nplt.plot(a, np.cos(2 * np.pi * a), 'r--')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_108"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\na = np.arange(10)\nplt.plot(a, a * 1.5, a, a * 2.5, a, a * 3.5, a, a * 4.5)\nplt.show()\n# format_string： 控制曲线的格式字符串,可选-----由颜色字符、风格字符、标记字符组成,可以组合使用\n# 颜色字符: b, g, r, c, m, y, k, w, 0.8（灰度值字符串）,#008000(RGB某种颜色)\n# 风格字符: -实线，--破折线，-.点划线，：虚线，\"''无线条",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_109"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\na = np.arange(10)\nplt.plot(a, a * 1.5, 'go-', a, a * 2.5,'rx', a, a * 3.5,'*', a, a * 4.5,'b-.')\nplt.show()\n# **kwargs： 放入第二组或更多(x, y, format_string),绘制多条曲线时使用(x轴数据不能省略)\n# color:控制颜色，color='green'\n# linestyle:线条风格,linestyle='dashed'\n# marker:标记风格, marker='o'\n# markerfacecolor:标记颜色，markerfacecolor='blue'\n# markersize:标记尺寸, markersize=20",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_110"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt  # （引入模块的别名）\n# 当plt.plot()中只有一个列表时，会被当成y轴，而x轴是列表的索引，自动生成\nplt.plot([3, 1, 4, 5, 2])\nplt.ylabel(\"grade\")\nplt.savefig('grade', dpi=600)  # 将绘制的曲线存储成PNG文件,dpi=600：每个英寸包含600个像素点，表示输出图片的质量\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_111"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nplt.plot([0, 2, 4, 6, 8], [3, 1, 4, 5, 2])\nplt.ylabel('grade')\nplt.axis([-1, 10, 0, 6])  # 设定横纵坐标尺度的列表,代表x轴坐标起始于-1，终止于10；y轴坐标起始于0，终止于6\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/cdlwhm1217096231/matplotlib_tutorials",
+    "file_id": "gh_cdlwhm1217096231_matplotlib_tutorials_112"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nplt.scatter(x, y, label='Scatter', color='k', marker='*', s=100)\nplt.xlabel('x')\nplt.ylabel('y')\nplt.title('Interesting Graph\\n')\nplt.legend()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/madhav165/matplotlib-tutorials",
+    "file_id": "gh_madhav165_matplotlib-tutorials_113"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\n# Creating a basic graph with values for x and y coordinate\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Brr1-99/Matplotlib_Basic_Tutorial",
+    "file_id": "gh_Brr1-99_Matplotlib_Basic_Tutorial_114"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nplt.title('The first of many graphs', fontdict={'fontname': 'Comic Sans MS', 'fontsize': 20})\nplt.xlabel('X axis name')\nplt.ylabel('Y axis name')\n# Changing the steps on the axis\nplt.xticks([0,1,2,3])\nplt.yticks([2,4,6,8])\n# Putting a legend to our graph-lines and styling it\nplt.plot(x,y, label='meaning_of_the_line', color='yellow', linewidth=2, marker='.', markeredgecolor='blue', linestyle='--')\nplt.legend()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Brr1-99/Matplotlib_Basic_Tutorial",
+    "file_id": "gh_Brr1-99_Matplotlib_Basic_Tutorial_115"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nx2 = np.arange(0, 4, 0.5)\nplt.plot(x2, x2**2, 'r', label='X^2')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Brr1-99/Matplotlib_Basic_Tutorial",
+    "file_id": "gh_Brr1-99_Matplotlib_Basic_Tutorial_116"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\nx=np.array([44,23,1,5])\ny=np.array([77,12,33,21])\nplt.plot(x,y,'o')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_117"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx=np.array([44,12,3,12])\ny=np.array([77,12,33,21])\nplt.plot(y,marker='o')\nplt.plot(x,marker='*')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_118"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\ny=np.array([77,12,33,21])\nplt.plot(y,marker='o')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_119"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\nx=np.array([44,23,1,5])\ny=np.array([77,12,33,21])\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_120"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\nx=np.array([44,23,1,5])\ny=np.array([77,12,33,21])\nplt.plot(x,y,'*:r')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_121"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\ny=np.array([77,12,33,21])\nplt.plot(y,marker='o',color='r',linewidth='15.5')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_122"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\ny=np.array([77,12,33,21])\nplt.plot(y,marker='o',color='g',linestyle='--')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_123"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\nx=np.array([44,23,1,5])\ny=np.array([77,12,33,21])\nplt.plot(x,y,'o:',ms=10,mec='g')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_124"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nfrom matplotlib import markers\nimport numpy as np\nimport matplotlib.pyplot as plt\nx=np.array([44,23,1,5])\ny=np.array([77,12,33,21])\nplt.plot(x,y,'o:',ms=10,mec='r',mfc='b')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Arpan-tech-create/matplotlib-tutorials-python",
+    "file_id": "gh_Arpan-tech-create_matplotlib-tutorials-python_125"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n# Bar chart = compare categories of data by representing each category with a bar graph\ncategories = np.array([\"Grains\", \"Fruit\", \"Vegetables\", \"Protein\", \"Dairy\", \"Sweets\"])\nvalues = np.array([4, 3, 2, 5, 3, 1])\nplt.bar(categories, values, color=\"skyblue\")\n# plt.barh(categories, values, color=\"skyblue\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/JimmyAlam2000/Matplotlib",
+    "file_id": "gh_JimmyAlam2000_Matplotlib_126"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([2023, 2024, 2025, 2026])\ny = np.array([15, 25, 30, 20])\nplt.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/JimmyAlam2000/Matplotlib",
+    "file_id": "gh_JimmyAlam2000_Matplotlib_127"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Violin Plot\r\nsns.violinplot(data= titanic, x= 'age', y= 'fare', hue= 'sex', split= True)  #split->shows distribution ny hue\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_128"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Scatter Plot\r\nsns.scatterplot(data=titanic, x='age', y='fare', hue='sex')\r\nplt.show()\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_129"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Regplot\r\nsns.regplot(data= titanic, x= 'age', y= 'fare')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_130"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#pairplot\r\nsns.pairplot(titanic, hue='sex', vars=['age','fare'])\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_131"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Lineplot\r\nsns.lineplot(data= titanic, x= 'age', y= 'fare')\r\nplt.show()\r",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_132"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#kdeplot\r\nsns.kdeplot(data=titanic['age'].dropna(), shade = True)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_133"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Distribution Plot\r\nsns.displot(data=titanic, x='age', hue='sex', kind='kde', height=5, aspect=1.5)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_134"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Countplot\r\nsns.countplot(data= titanic, x= 'class', hue= 'sex')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_135"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Catplot\r\nsns.catplot(data= titanic, x= 'age', y= 'fare', hue= 'sex', kind= 'bar')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_136"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\r\nimport pandas as pd\r\nimport matplotlib.pyplot as plt\r\nimport seaborn as sns\r\n#Loading titanic dataset\r\ntitanic = sns.load_dataset('titanic')\r\n#Box Plot\r\nsns.boxplot(data= titanic, x= 'age', y= 'fare', hue= 'sex')\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ahmedbasil05/Seaborn-Tutorial",
+    "file_id": "gh_ahmedbasil05_Seaborn-Tutorial_137"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# In[2]:\n# Similar functions for similar tasks\npenguins = sns.load_dataset(\"penguins\")\n# histplot\nsns.histplot(data=penguins, x=\"flipper_length_mm\", hue=\"species\", multiple=\"stack\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_138"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ntips = sns.load_dataset(\"tips\")\ng = sns.relplot(data=tips, x=\"total_bill\", y=\"tip\")\ng.ax.axline(xy1=(10, 2), slope=.2, color=\"b\", dashes=(5, 2))\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_139"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport numpy as np\n# # Building structured multi-plot grids\n# ## Conditional small multiples\n# In[3]:\ntips = sns.load_dataset(\"tips\")\ng = sns.FacetGrid(tips, col=\"time\")\n# In[4]:\ng = sns.FacetGrid(tips, col=\"time\")\ng.map(sns.histplot, \"tip\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_140"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nattend = sns.load_dataset(\"attention\").query(\"subject <= 12\")\ng = sns.FacetGrid(attend, col=\"subject\", col_wrap=4, height=2, ylim=(0, 10))\ng.map(sns.pointplot, \"solutions\", \"score\", order=[1, 2, 3], color=\".3\", errorbar=None)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_141"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport seaborn as sns\n# In[6]:\n# Multivariate views on complex datasets\n# 복잡한 데이터 세트에 대한 다변량 보기\n# In[7]:\n# jointplot 단일 관계에 중점. 각 변수의 주변 분포와 함께 두 변수 간의 결합 분포를 플로팅.\npenguins = sns.load_dataset(\"penguins\")\nsns.jointplot(data=penguins, x=\"flipper_length_mm\", y=\"bill_length_mm\", hue=\"species\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_142"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef sinplot(n=10, flip=1):\n    x = np.linspace(0, 14, 100)\n    for i in range(1, n + 1):\n        plt.plot(x, np.sin(x + i * .5) * (n + 2 - i) * flip)\n\n\nsinplot()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_143"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nsns.set_theme()\n# ## Seaborn figure styles\n# In[6]:\nsns.set_style(\"whitegrid\")\ndata = np.random.normal(size=(20, 6)) + np.arange(6) / 2\nsns.boxplot(data=data);\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_144"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport seaborn as sns\n# ## Long-form vs. wide-form data\n# ### Long-form data\n# In[3]:\nflights = sns.load_dataset(\"flights\")\n# In[4]:\nsns.relplot(data=flights, x=\"year\", y=\"passengers\", hue=\"month\", kind=\"line\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_145"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport seaborn as sns\nimport numpy as np\n# # Estimating regression fits\n# ## Functions for drawing linear regression models\n# In[4]:\ntips = sns.load_dataset(\"tips\")\nsns.regplot(x=\"total_bill\", y=\"tip\", data=tips);\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_146"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.random.normal(0, 1, 50)\ny = x * 2 + np.random.normal(0, 2, size=x.size)\nsns.regplot(x=x, y=y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/LimSeungMin/Seaborn_tutorial",
+    "file_id": "gh_LimSeungMin_Seaborn_tutorial_147"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport numpy as np\n# loads the titanic dataset\ntitanic = sns.load_dataset(\"titanic\")\n# title\nplt.title('Fares paid by passengers of the Titanic by deck', fontsize=20)\n# create plot(set jitter to true)\nsns.stripplot(x=\"deck\", y=\"fare\", jitter=True, data=titanic);\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Yasimcd/numpy-pandas-matplotlib-seaborn-tutorial-code",
+    "file_id": "gh_Yasimcd_numpy-pandas-matplotlib-seaborn-tutorial-code_148"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom mpl_toolkits import mplot3d\nfig = plt.figure()\nax = plt.axes(projection='3d')\nz = np.linspace(0, 30, 1000)\nx = np.sin(z)\ny = np.cos(z)\n# ax.plot3D(x, y, z, 'red')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/geosconsulting/matplotlib",
+    "file_id": "gh_geosconsulting_matplotlib_149"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib as mpl\nfrom mpl_toolkits.mplot3d import Axes3D\nimport matplotlib.pyplot as plt\nimport numpy as np\nfig = plt.figure()\nax = fig.add_subplot(111, projection='3d')\nxpos=np.random.randint(1,10,10)\nypos=np.random.randint(1,10,10)\nzpos=np.zeros(10)\ndx=np.ones(10)\ndy=np.ones(10)\ndz=np.random.randint(1,10,10)\nax.bar3d(xpos, ypos, zpos, dx, dy, dz, color='b', zsort='average')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ncrump/PyPlots",
+    "file_id": "gh_ncrump_PyPlots_150"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nplt.subplot(1,2,2)\nplt.bar(x,y)\nplt.title('Bar chart')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ShikshaJaiswal1/Matplotlib-Practice",
+    "file_id": "gh_ShikshaJaiswal1_Matplotlib-Practice_151"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\n# hours_studies = [ 1,2,3,4,5,6,7,8]\n# exam_scores = [50,55,60,65,70,75,80,85] \nplt.scatter([1,2,3], [54,63,70], color='green', marker='o', label='Student Data')\nplt.scatter([1,2,3], [57,66,74], color='blue', marker='o')\nplt.scatter([1,2,3], [53,72,72], color='orange', marker='o')\nplt.ylabel('Scores of the exam')\nplt.xlabel('Hours Studied')\nplt.title('Relationship between study time and exam scores')\nplt.legend()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ShikshaJaiswal1/Matplotlib-Practice",
+    "file_id": "gh_ShikshaJaiswal1_Matplotlib-Practice_152"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ShikshaJaiswal1/Matplotlib-Practice",
+    "file_id": "gh_ShikshaJaiswal1_Matplotlib-Practice_153"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nplt.plot(x,y,color='blue',linestyle='dotted',linewidth=2, marker='o', label='shop data')\nplt.title(\"Bakery Sales this week!\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ShikshaJaiswal1/Matplotlib-Practice",
+    "file_id": "gh_ShikshaJaiswal1_Matplotlib-Practice_154"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nplt.plot(x, y, color='black', marker='o')\nplt.title('Simple line Plot')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/ShikshaJaiswal1/Matplotlib-Practice",
+    "file_id": "gh_ShikshaJaiswal1_Matplotlib-Practice_155"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib\n######################################################################\nimport numpy as np\nimport matplotlib.pyplot as plt\n######################################################################\n## LATEX STYLE\nfrom matplotlib import rc\n# rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})\n######################################################################\n# Fake Data\nX = np.arange(0.0, 20.0, 0.1)\nY = np.array([x+np.random.uniform(2,-2) for x in X])\nX = np.array([x+np.random.uniform(2,-2) for x in X])\n# DATA\nplt.plot(X, Y, 'k.')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/charnley/matplotlib_examples",
+    "file_id": "gh_charnley_matplotlib_examples_156"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\r\nplt.plot(x, y, color='purple', linestyle='dashed',linewidth=4,marker='*',markerfacecolor='blue',markersize=12)\r\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Sofiakousar/python-plotting-gallery",
+    "file_id": "gh_Sofiakousar_python-plotting-gallery_157"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef main():\n    x = np.linspace(-1, 2, 100)\n    y = np.exp(x)\n\n    plt.figure()\n    plt.plot(x, y)\n    plt.xlabel('$x$')\n    plt.ylabel('$\\exp(x)$')\n\n    plt.figure()\n    plt.plot(x, -np.exp(-x))\n    plt.xlabel('$x$')\n    plt.ylabel('$-\\exp(-x)$')\n\n    plt.show()\n\n\nmain()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/choldgraf/sphinx-gallery_seaborn",
+    "file_id": "gh_choldgraf_sphinx-gallery_seaborn_158"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.linspace(-np.pi, np.pi, 300)\nxx, yy = np.meshgrid(x, x)\nz = np.cos(xx) + np.cos(yy)\nplt.figure()\nplt.imshow(z)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/choldgraf/sphinx-gallery_seaborn",
+    "file_id": "gh_choldgraf_sphinx-gallery_seaborn_159"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\ndef main():\n    x = np.linspace(-1, 2, 100)\n    y = np.exp(x)\n\n    plt.figure()\n    plt.plot(x, y)\n    plt.xlabel('$x$')\n    plt.ylabel('$\\exp(x)$')\n\n    # The next line sets the thumbnail for the second figure in the gallery\n    #   (plot with negative exponential in orange)\n    # sphinx_gallery_thumbnail_number = 2\n    plt.figure()\n    plt.plot(x, -np.exp(-x), color='orange', linewidth=4)\n    plt.xlabel('$x$')\n    plt.ylabel('$-\\exp(-x)$')\n\n    plt.show()\n\n\nmain()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/choldgraf/sphinx-gallery_seaborn",
+    "file_id": "gh_choldgraf_sphinx-gallery_seaborn_160"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\ny = np.array([35, 25, 25, 15])\nplt.pie(y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_161"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.random.normal(170, 10, 250)\nplt.hist(x)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_162"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nscores = np.random.normal(75, 12, 300)\nplt.hist(scores, bins=10, color='skyblue', edgecolor='black')\nplt.title(\"Exam Scores Distribution\")\nplt.xlabel(\"Scores\")\nplt.ylabel(\"Number of Students\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_163"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nheights = np.random.normal(165, 15, 200)\nplt.hist(heights, bins=8, color='green', edgecolor='black')\nplt.title(\"Height Distribution\")\nplt.xlabel(\"Height (cm)\")\nplt.ylabel(\"Frequency\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_164"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\ntemperatures = np.random.normal(30, 5, 150)\nplt.hist(temperatures, bins=12, color='orange', edgecolor='black')\nplt.title(\"Temperature Distribution\")\nplt.xlabel(\"Temperature (°C)\")\nplt.ylabel(\"Days\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_165"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nsalaries = np.random.normal(60, 20, 250)\nplt.hist(salaries, bins=10, color='purple', edgecolor='black')\nplt.title(\"Salary Distribution\")\nplt.xlabel(\"Salary (in 1000s)\")\nplt.ylabel(\"Number of Employees\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_166"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.bar(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_167"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nplt.bar(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_168"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.barh(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_169"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.bar(x, y, color = \"red\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_170"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.bar(x, y, color = \"hotpink\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_171"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.bar(x, y, color = \"#4CAF50\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_172"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.bar(x, y, width = 0.1)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_173"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([\"A\", \"B\", \"C\", \"D\"])\ny = np.array([3, 8, 1, 10])\nplt.barh(x, y, height = 0.1)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_174"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_175"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y)\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_176"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y, color = 'hotpink')\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y, color = '#88c999')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_177"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([\"red\",\"green\",\"blue\",\"yellow\",\"pink\",\"black\",\"orange\",\"purple\",\"beige\",\"brown\",\"gray\",\"cyan\",\"magenta\"])\nplt.scatter(x, y, c=colors)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_178"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([0, 10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])\nplt.scatter(x, y, c=colors, cmap='viridis')\nplt.colorbar()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_179"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([0, 10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])\nplt.scatter(x, y, c=colors, cmap='winter_r')\nplt.colorbar()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_180"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nsizes = np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])\nplt.scatter(x, y, s=sizes)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_181"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nsizes = np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])\nplt.scatter(x, y, s=sizes, alpha=0.5)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_182"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.random.randint(100, size=(100))\ny = np.random.randint(100, size=(100))\ncolors = np.random.randint(100, size=(100))\nsizes = 10 * np.random.randint(100, size=(100))\nplt.scatter(x, y, c=colors, s=sizes, alpha=0.5, cmap='nipy_spectral')\nplt.colorbar()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_183"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(1, 2, 1)\nplt.plot(x,y)\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(1, 2, 2)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_184"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(2, 1, 1)\nplt.plot(x,y)\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(2, 1, 2)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_185"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(2, 3, 1)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_186"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(2, 3, 2)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_187"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(2, 3, 3)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_188"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(2, 3, 4)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_189"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(2, 3, 5)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_190"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(2, 3, 6)\nplt.plot(x,y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_191"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(1, 2, 1)\nplt.plot(x,y)\nplt.title(\"SALES\")\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(1, 2, 2)\nplt.plot(x,y)\nplt.title(\"INCOME\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_192"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\nplt.subplot(1, 2, 1)\nplt.plot(x,y)\nplt.title(\"SALES\")\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\nplt.subplot(1, 2, 2)\nplt.plot(x,y)\nplt.title(\"INCOME\")\nplt.suptitle(\"MY SHOP\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_193"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.title(\"Sports Watch Data\")\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.plot(x, y)\nplt.grid()\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_194"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.title(\"Sports Watch Data\")\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.plot(x, y)\nplt.grid(axis = 'x')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_195"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.title(\"Sports Watch Data\")\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.plot(x, y)\nplt.grid(axis = 'y')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_196"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.title(\"Sports Watch Data\")\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.plot(x, y)\nplt.grid(color = 'green', linestyle = '--', linewidth = 0.5)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_197"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.plot(x, y)\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_198"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.plot(x, y)\nplt.title(\"Sports Watch Data\")\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_199"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\nplt.title(\"Sports Watch Data\", loc = 'left')\nplt.xlabel(\"Average Pulse\")\nplt.ylabel(\"Calorie Burnage\")\nplt.plot(x, y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_200"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, linestyle = 'dotted')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_201"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, linestyle = 'dashed')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_202"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, ls = ':')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_203"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, ls = '')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_204"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, color = 'r')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_205"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, c = '#4CAF50')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_206"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, linewidth = '20.5')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_207"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\ny1 = np.array([3, 8, 1, 10])\ny2 = np.array([6, 2, 7, 11])\nplt.plot(y1)\nplt.plot(y2)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_208"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nx1 = np.array([0, 1, 2, 3])\ny1 = np.array([3, 8, 1, 10])\nx2 = np.array([0, 1, 2, 3])\ny2 = np.array([6, 2, 7, 11])\nplt.plot(x1, y1, x2, y2)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_209"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = 'o')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_210"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = '*')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_211"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = '_')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_212"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, 'o:r')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_213"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, 'o:')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_214"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, 'o-.')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_215"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, 'ob')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_216"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, 'ow')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_217"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = 'o', ms = 20)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_218"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = 'o', ms = 20, mec = 'r')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_219"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = 'o', ms = 20, mfc = 'r')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_220"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nypoints = np.array([3, 8, 1, 10])\nplt.plot(ypoints, marker = 'o', ms = 20, mec = 'r', mfc = 'r')\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/omi3123/matplotib-visualization-hub",
+    "file_id": "gh_omi3123_matplotib-visualization-hub_221"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\npenguins = sns.load_dataset(\"penguins\")\nsns.jointplot(data=penguins, x=\"flipper_length_mm\", y=\"bill_length_mm\", hue=\"species\")\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/sandeep0402/python-examples",
+    "file_id": "gh_sandeep0402_python-examples_222"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\n\n# Sample data\nnp.random.seed(42)\nx = np.linspace(0, 10, 100)\ny = np.sin(x) + np.random.randn(100) * 0.1\ndf = pd.DataFrame({\n    'x': np.random.randn(100),\n    'y': np.random.randn(100) * 2 + 1,\n    'category': np.random.choice(['A', 'B', 'C', 'D'], 100),\n    'group': np.random.choice(['Group1', 'Group2'], 100),\n    'value': np.random.randint(10, 100, 100),\n    'score': np.random.uniform(0, 100, 100),\n})\ndata = df.copy()\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n# generate random data for scatter plot\ndata_x= np.random.randn(10)\ndata_y = np.random.randn(10)\n# generating postive random numbers \ndata_x = np.abs(data_x)\n# plot the data on scatter plot\nplt.scatter(data_x, data_y)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Ctoic/Intermediate-Python",
+    "file_id": "gh_Ctoic_Intermediate-Python_223"
+  },
+  {
+    "code": "import numpy as np\nimport pandas as pd\nimport matplotlib\nmatplotlib.use('Agg')\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nimport warnings\nwarnings.filterwarnings('ignore')\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n# generate random data\ndata = np.random.randn(1000)\n# plot the data\nplt.hist(data, bins=20)\nplt.show()",
+    "caption": "",
+    "library": "matplotlib,seaborn",
+    "source": "https://github.com/Ctoic/Intermediate-Python",
+    "file_id": "gh_Ctoic_Intermediate-Python_224"
+  }
+]

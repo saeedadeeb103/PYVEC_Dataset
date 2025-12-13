@@ -1,0 +1,295 @@
+PYTHON VISUALIZATION SNIPPET EXTRACTION
+========================================
+
+3,802 Validated Snippets → all_validated_snippets.json
+│
+├─── DATA SOURCES (4 Platforms)
+│    │
+│    ├─── 1. KAGGLE (2,614 snippets) ✓
+│    │    │
+│    │    ├─── API & Search
+│    │    │    ├─ Kaggle API Client
+│    │    │    ├─ 68 search queries (19 completed)
+│    │    │    ├─ 5 pages × 20 results per query
+│    │    │    └─ Queries: matplotlib, seaborn, titanic, iris, covid...
+│    │    │
+│    │    ├─── Download
+│    │    │    ├─ 2,406 unique notebooks
+│    │    │    ├─ .ipynb JSON format
+│    │    │    └─ Track: seen_kernels_smart.json
+│    │    │
+│    │    ├─── Parse & Extract
+│    │    │    ├─ Cell-by-cell analysis
+│    │    │    ├─ Track imports across cells
+│    │    │    ├─ Track data setup (df = ...)
+│    │    │    ├─ Find plot cells (plt., sns., ax.)
+│    │    │    └─ Build complete snippets with context
+│    │    │
+│    │    ├─── Validate
+│    │    │    ├─ Add standard imports
+│    │    │    ├─ Inject synthetic DataFrame
+│    │    │    ├─ Execute with timeout (5s)
+│    │    │    ├─ Check plt.get_fignums() > 0
+│    │    │    └─ Filter bad patterns (file I/O, ML libs)
+│    │    │
+│    │    └─── Result: 2,614 validated (1.09 per notebook)
+│    │
+│    ├─── 2. STACKOVERFLOW (605 snippets) ✓
+│    │    │
+│    │    ├─── API & Search
+│    │    │    ├─ StackExchange REST API v2.3
+│    │    │    ├─ Tags: matplotlib, seaborn, combinations
+│    │    │    ├─ Rate limit: 300/day
+│    │    │    └─ Track: seen_questions.json
+│    │    │
+│    │    ├─── Download
+│    │    │    ├─ 324 questions processed
+│    │    │    ├─ Score-sorted answers
+│    │    │    └─ HTML body with code blocks
+│    │    │
+│    │    ├─── Parse & Extract
+│    │    │    ├─ BeautifulSoup HTML parsing
+│    │    │    ├─ Extract <code> blocks
+│    │    │    ├─ Filter for plot patterns
+│    │    │    └─ Regex: plt\., sns\., ax\.
+│    │    │
+│    │    ├─── Validate
+│    │    │    ├─ Add imports + synthetic data
+│    │    │    ├─ Execute with timeout (5s)
+│    │    │    ├─ Verify figure output
+│    │    │    └─ MD5 deduplication
+│    │    │
+│    │    └─── Result: 605 validated (1.87 per question)
+│    │
+│    ├─── 3. GITHUB (225 snippets) ✓
+│    │    │
+│    │    ├─── API & Search
+│    │    │    ├─ GitHub REST API v3
+│    │    │    ├─ Query: tutorial/example repos
+│    │    │    ├─ Topics: visualization, matplotlib
+│    │    │    ├─ Rate limit: 5,000/hour
+│    │    │    └─ Track: seen_repos_smart.json
+│    │    │
+│    │    ├─── Download
+│    │    │    ├─ 567 repos processed
+│    │    │    ├─ Filter: tutorial/example repos
+│    │    │    ├─ Download .py files only
+│    │    │    └─ Skip: tests, utils, large files
+│    │    │
+│    │    ├─── Parse & Extract
+│    │    │    ├─ Python AST parsing
+│    │    │    ├─ Extract plot functions
+│    │    │    ├─ Find standalone code blocks
+│    │    │    ├─ Skip classes, utilities
+│    │    │    └─ Detect plot calls in functions
+│    │    │
+│    │    ├─── Validate
+│    │    │    ├─ Complete function bodies
+│    │    │    ├─ Add imports + sample data
+│    │    │    ├─ Execute with timeout (10s)
+│    │    │    ├─ Verify figure created
+│    │    │    └─ Deduplicate by hash
+│    │    │
+│    │    └─── Result: 225 validated (0.40 per repo)
+│    │
+│    └─── 4. GALLERIES (358 snippets) ✓
+│         │
+│         ├─── Scrape Index
+│         │    ├─ Matplotlib gallery (17 categories)
+│         │    ├─ Seaborn gallery (~47 examples)
+│         │    ├─ BeautifulSoup + requests
+│         │    └─ Parse gallery HTML index
+│         │
+│         ├─── Download
+│         │    ├─ GitHub raw URLs
+│         │    ├─ matplotlib: /main/galleries/examples/
+│         │    ├─ seaborn: /master/examples/
+│         │    └─ Direct .py file download
+│         │
+│         ├─── Parse & Clean
+│         │    ├─ Remove sphinx directives
+│         │    ├─ Strip # %% blocks
+│         │    ├─ Extract docstrings as captions
+│         │    └─ Keep plot code only
+│         │
+│         ├─── Validate
+│         │    ├─ Add matplotlib.use('Agg')
+│         │    ├─ Execute (official = works!)
+│         │    ├─ Verify figure output
+│         │    └─ 99.2% success rate
+│         │
+│         └─── Result: 358 validated (ALL with captions!)
+│
+├─── VALIDATION PIPELINE (Common to All)
+│    │
+│    ├─── Step 1: Code Execution Test
+│    │    ├─ Set non-interactive backend: matplotlib.use('Agg')
+│    │    ├─ Signal-based timeout (5-10s)
+│    │    ├─ Execute in isolated globals
+│    │    ├─ Catch exceptions
+│    │    └─ Return True if no errors
+│    │
+│    ├─── Step 2: Figure Verification
+│    │    ├─ Check plt.get_fignums()
+│    │    ├─ Must have ≥1 figure
+│    │    ├─ Close all figures after test
+│    │    └─ Return False if no figure
+│    │
+│    ├─── Step 3: Synthetic Data Injection
+│    │    ├─ Detect undefined: df, data, x, y, dataset
+│    │    ├─ Generate sample DataFrame:
+│    │    │  ├─ 100 rows
+│    │    │  ├─ Numeric: x, y, value
+│    │    │  ├─ Categorical: category
+│    │    │  └─ Temporal: date
+│    │    ├─ Create aliases: data = df, x = df['x']
+│    │    └─ Prepend to snippet code
+│    │
+│    ├─── Step 4: Bad Pattern Filtering
+│    │    ├─ Reject: file I/O (read_csv, read_excel)
+│    │    ├─ Reject: network calls (requests, urllib)
+│    │    ├─ Reject: images (Image, cv2)
+│    │    ├─ Reject: ML frameworks (torch, tensorflow)
+│    │    └─ Keep: pure visualization code
+│    │
+│    └─── Step 5: Deduplication
+│         ├─ Compute MD5 hash of code
+│         ├─ Track in seen_hashes set
+│         ├─ Skip if duplicate
+│         └─ Save if unique
+│
+├─── PROGRESS TRACKING & RESUMABILITY
+│    │
+│    ├─── Kaggle Tracking
+│    │    ├─ seen_kernels_smart.json (2,406 notebooks)
+│    │    └─ completed_queries.json (19/68 queries)
+│    │
+│    ├─── StackOverflow Tracking
+│    │    └─ seen_questions.json (324 questions)
+│    │
+│    ├─── GitHub Tracking
+│    │    └─ seen_repos_smart.json (567 repos)
+│    │
+│    └─── Features
+│         ├─ Skip already-processed items
+│         ├─ Resume after rate limits
+│         ├─ Preserve validated snippets
+│         └─ Automatic checkpoint saves
+│
+├─── TECHNOLOGY STACK
+│    │
+│    ├─── APIs & Authentication
+│    │    ├─ Kaggle API (kaggle package + kaggle.json)
+│    │    ├─ StackExchange REST API (no auth)
+│    │    ├─ GitHub REST API (github_key.json)
+│    │    └─ HTTP requests (galleries)
+│    │
+│    ├─── Parsing
+│    │    ├─ json (notebook parsing)
+│    │    ├─ ast (Python code parsing)
+│    │    ├─ BeautifulSoup (HTML parsing)
+│    │    └─ re (regex patterns)
+│    │
+│    ├─── Validation
+│    │    ├─ matplotlib (execution + figure check)
+│    │    ├─ seaborn (snippet support)
+│    │    ├─ numpy (synthetic data)
+│    │    ├─ pandas (DataFrames)
+│    │    └─ signal (timeout control)
+│    │
+│    └─── Utilities
+│         ├─ hashlib (MD5 deduplication)
+│         ├─ requests (HTTP downloads)
+│         ├─ tempfile (temp directories)
+│         └─ tqdm (progress bars)
+│
+├─── RATE LIMIT HANDLING
+│    │
+│    ├─── Kaggle: ~200/hour
+│    │    ├─ Detect: 404/429 errors
+│    │    ├─ Strategy: wait 60s, retry
+│    │    └─ Fallback: skip query
+│    │
+│    ├─── StackOverflow: 300/day
+│    │    ├─ Detect: 429 errors
+│    │    ├─ Strategy: exponential backoff
+│    │    └─ Tracking: seen_questions
+│    │
+│    ├─── GitHub: 5,000/hour
+│    │    ├─ Detect: 403/429 errors
+│    │    ├─ Strategy: rotate API keys
+│    │    └─ Backoff: exponential with jitter
+│    │
+│    └─── Galleries: No limit
+│         └─ Direct HTTP (polite delays)
+│
+└─── OUTPUT
+     │
+     ├─── Individual Files
+     │    ├─ Kaggle/kaggle_smart_validated.json (2,614)
+     │    ├─ StackOverflow/stackoverflow_validated.json (605)
+     │    ├─ GitHub/github_smart_validated.json (225)
+     │    └─ Galleries/gallery_validated.json (358)
+     │
+     ├─── Combined File: all_validated_snippets.json
+     │    ├─ Total: 3,802 snippets
+     │    ├─ Format: JSON array
+     │    └─ Schema:
+     │         ├─ code: Python source (100%)
+     │         ├─ caption: Description (~11%)
+     │         ├─ library: matplotlib/seaborn (100%)
+     │         ├─ source_type: Platform name (100%)
+     │         ├─ source: Original URL (100%)
+     │         └─ file_id: Unique identifier (100%)
+     │
+     └─── Quality Metrics
+          ├─ 100% executable (no syntax errors)
+          ├─ 100% produce figures (verified)
+          ├─ 100% self-contained (synthetic data)
+          ├─ 0% duplicates (MD5 checked)
+          └─ ~11% have captions (galleries only)
+
+
+SUMMARY STATISTICS
+==================
+
+Extraction Yield:
+├─ Kaggle: 2,614 / 2,406 notebooks = 1.09 snippets/notebook
+├─ StackOverflow: 605 / 324 questions = 1.87 snippets/question
+├─ GitHub: 225 / 567 repos = 0.40 snippets/repo
+└─ Galleries: 358 / 361 examples = 99.2% success
+
+Code Quality:
+├─ Executable: 3,802 / 3,802 = 100%
+├─ Produce Figures: 3,802 / 3,802 = 100%
+├─ Self-contained: 3,802 / 3,802 = 100%
+└─ With Captions: 408 / 3,802 = 11%
+
+Time Investment:
+├─ Development: ~6 hours
+├─ Extraction: ~4 hours
+└─ Total: ~10 hours → 3,802 validated snippets
+
+Future Potential:
+├─ Kaggle: 49 more queries → ~2,000 more snippets
+├─ ArXiv: LaTeX source extraction
+├─ Papers With Code: GitHub + paper links
+└─ TikZ Conversion: LLM-based translation
+
+
+KEY INSIGHTS
+============
+
+What Worked:
+✓ API-first approach (fast, reliable, official data)
+✓ Execution validation (ensures 100% quality)
+✓ Synthetic data injection (makes incomplete code work)
+✓ Progress tracking (resume after interruptions)
+✓ Source diversity (different styles & complexity)
+
+Challenges Solved:
+⚠ Rate limits → tracking + exponential backoff
+⚠ Incomplete code → context cell reconstruction
+⚠ Undefined variables → synthetic data injection
+⚠ Large repos → file size filtering
+⚠ Duplicate code → MD5 hashing
