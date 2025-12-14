@@ -1,0 +1,9 @@
+tqdm
+requests
+beautifulsoup4
+matplotlib
+numpy
+pandas
+flask
+flask-cors
+lxml
