@@ -1,0 +1,14 @@
+torch
+transformers
+trl
+peft
+datasets
+orjson
+accelerate
+deepspeed
+dreamsim
+POT
+# install detikzify from git: pip install 'detikzify @ git+https://github.com/potamides/DeTikZify'
+pdfCropMargins
+wandb
+tensorboard
