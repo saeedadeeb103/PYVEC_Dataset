@@ -6,9 +6,11 @@ datasets
 orjson
 accelerate
 deepspeed
+hydra-core
+omegaconf
+qwen-vl-utils
 dreamsim
 POT
-# install detikzify from git: pip install 'detikzify @ git+https://github.com/potamides/DeTikZify'
 pdfCropMargins
 wandb
 tensorboard

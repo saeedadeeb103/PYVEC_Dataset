@@ -1,0 +1,4 @@
+# @package reward
+backend: dreamsim
+model_name: ensemble
+execution_bonus: 0.1

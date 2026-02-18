@@ -1,0 +1,55 @@
+# @package _global_
+# SFT training: caption / image → Python/Matplotlib code
+#
+# training_mode:
+#   text_only         — caption → code  (default, text-only LLM)
+#   inverse_graphics  — image → code    (VLM, self-supervised like DeTikZify)
+#   combined          — image + caption → code (TikZero+ style)
+
+defaults:
+  - _self_
+  - model: qwen25_3b
+  - override hydra/job_logging: default
+
+# Training mode: text_only | inverse_graphics | combined
+training_mode: text_only
+
+paths:
+  data_dir: ${oc.env:PYVEC_WORK,./data}/python_ft
+  work_dir: ${oc.env:PYVEC_WORK,.}
+  render_dir: ${oc.env:PYVEC_WORK,./data}/rendered_images   # for multimodal modes
+
+model:
+  id: Qwen2.5-3B-Instruct
+  hf_id: Qwen/Qwen2.5-3B-Instruct
+  max_seq_len: 2048
+  is_vlm: false
+
+training:
+  epochs: 3
+  batch_size: 8
+  gradient_accumulation: 4
+  lr: 5e-5
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  warmup_ratio: 0.05
+  scheduler: cosine
+  packing: true
+  seed: 42
+
+lora:
+  enabled: false
+  rank: 128
+  alpha: 256
+  dropout: 0.05
+
+logging:
+  report_to: tensorboard   # tensorboard | wandb | none
+
+resume_from: null
+
+hydra:
+  run:
+    dir: .
+  job:
+    chdir: false

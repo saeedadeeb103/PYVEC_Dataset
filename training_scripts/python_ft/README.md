@@ -1,201 +1,253 @@
-# PythonFT — Fine-Tuning Pipeline for TikZ → Python/Matplotlib
+# PYVEC Python/Matplotlib Fine-Tuning Pipeline
 
-Fine-tune inverse graphics models to generate Python/Matplotlib code from scientific figure descriptions and images, adapted from the TikZero/DeTikZify/TikZilla architecture.
+Train language models to generate scientific figures from natural language descriptions.
+
+**Pipeline:** `Natural Language → LLM → Python/Matplotlib code → execute → Scientific Figure`
+
+## Training Modes
+
+Inspired by [TikZero+](https://arxiv.org/abs/2503.11509), the pipeline supports three training modes:
+
+| Mode | Input → Output | Model | Description |
+|------|---------------|-------|-------------|
+| `text_only` | caption → code | Text LLM (Qwen2.5-3B) | Standard SFT (AutomaTikZ-style) |
+| `inverse_graphics` | image → code | VLM (Qwen2.5-VL-3B) | Self-supervised, DeTikZify-style |
+| `combined` | image + caption → code | VLM (Qwen2.5-VL-3B) | TikZero+ style |
+
+### TikZero+ Two-Stage Pipeline
+
+Following TikZero+ Sec. 5.2(iii), the recommended multimodal pipeline is:
+
+1. **Stage 1 — Inverse Graphics**: Train the VLM on `image → code` using ALL samples (self-supervised, no captions needed). This teaches the model the image-to-code mapping.
+
+2. **Stage 2 — Combined**: Fine-tune the Stage 1 model on `image + caption → code`. This adds caption understanding while preserving the inverse graphics capability. Use a lower LR (1e-5) and fewer epochs.
+
+```bash
+# Stage 1: Inverse Graphics
+sbatch scripts/train_sft_inverse.sbatch
+
+# Stage 2: Combined (pass Stage 1 checkpoint)
+INVERSE_CHECKPOINT=trained_models_sft_python/<stage1_run>/final \
+  sbatch scripts/train_sft_combined.sbatch
+```
 
 ## Architecture
 
 ```
-Caption ──→ [TikZero Adapter (frozen)] ──→ Image Embeddings ──┐
-                                                               ├──→ [LLM Decoder (trainable)] ──→ Python/Matplotlib Code
-Image   ──→ [SigLIP Vision Encoder (frozen)] ────────────────┘
+python_ft/
+├── configs/                        # Hydra YAML configuration
+│   ├── prepare_data.yaml           #   data preparation defaults
+│   ├── sft.yaml                    #   SFT training defaults (all modes)
+│   ├── grpo.yaml                   #   GRPO training defaults
+│   ├── model/                      #   model presets
+│   │   ├── qwen25_3b.yaml          #     text-only LLM
+│   │   ├── qwen25_7b.yaml          #     text-only LLM (larger)
+│   │   ├── qwen25_vl_3b.yaml       #     VLM for multimodal modes
+│   │   └── qwen25_vl_7b.yaml       #     VLM (larger)
+│   └── reward/                     #   reward scorer presets
+│       ├── dinov2.yaml
+│       ├── clip.yaml
+│       └── dreamsim.yaml
+├── scripts/                        # SLURM sbatch scripts
+│   ├── prepare_data.sbatch         #   CPU-only data rendering
+│   ├── train_sft.sbatch            #   1x A40 — text-only SFT
+│   ├── train_sft_4gpu.sbatch       #   4x A40 — text-only SFT
+│   ├── train_sft_inverse.sbatch    #   1x A40 — inverse graphics (Stage 1)
+│   ├── train_sft_combined.sbatch   #   1x A40 — combined (Stage 2)
+│   ├── train_grpo.sbatch           #   1x A40 — GRPO
+│   └── train_grpo_4gpu.sbatch      #   4x A40 — GRPO
+├── prepare_data.py                 # JSONL → rendered images + HF Arrow dataset
+├── sft.py                          # SFT (text-only, inverse graphics, combined)
+├── grpo.py                         # GRPO reinforcement learning
+├── rewards.py                      # Reward functions (DINOv2, CLIP, DreamSim)
+└── preprocessing.py                # Prompt templates and tokenization
 ```
 
-## Prerequisites
+## Quick Start
+
+### 1. Prepare Data (render images)
 
 ```bash
-pip install torch transformers trl peft datasets orjson accelerate dreamsim POT
-pip install 'detikzify @ git+https://github.com/potamides/DeTikZify'
+python prepare_data.py
+python prepare_data.py rendering.dpi=200 rendering.workers=8
+sbatch scripts/prepare_data.sbatch
 ```
 
-Download models to `$WORK_DIR/models/`:
-```bash
-# Text-only
-huggingface-cli download Qwen/Qwen2.5-3B --local-dir $WORK_DIR/models/Qwen2.5-3B
-
-# Multimodal
-huggingface-cli download nllg/detikzify-v2-8b --local-dir $WORK_DIR/models/detikzify-v2-8b
-
-# TikZero adapter (optional, for text-conditioned inference)
-huggingface-cli download nllg/tikzero-adapter --local-dir $WORK_DIR/models/tikzero-adapter
-```
-
-## Pipeline
-
-### Step 1 — Prepare Data
-
-Convert the conversion pipeline output (`output/dataset.jsonl`) to HuggingFace Arrow format:
+### 2a. Text-Only SFT (default)
 
 ```bash
-python prepare_data.py \
-  --input ../../output/dataset.jsonl \
-  --images-dir ../../output \
-  --output data/python_ft \
-  --val-ratio 0.066 \
-  --min-code-len 50 \
-  --max-code-len 8000
+accelerate launch sft.py
+accelerate launch sft.py model=qwen25_7b training.lr=1e-4 lora.enabled=true
+sbatch scripts/train_sft.sbatch
 ```
 
-With rendered Python images (needed for GRPO):
-```bash
-python prepare_data.py \
-  --input ../../output/dataset.jsonl \
-  --images-dir ../../output \
-  --output data/python_ft \
-  --render \
-  --render-dir data/rendered_images
-```
-
-### Step 2 — SFT Training
-
-#### Option A: Text-Only (Qwen2.5-3B)
+### 2b. Inverse Graphics SFT (Stage 1)
 
 ```bash
-accelerate launch --config_file ../accelerate_configs/deepspeed_sft.yaml sft.py \
-  --mode text \
-  --model-id Qwen2.5-3B \
-  --data-dir data/python_ft \
-  --max-seq-len 2048 \
-  --epochs 5 \
-  --batch-size 16 \
-  --gradient-accumulation 2 \
-  --lr 1e-4 \
-  --scheduler cosine \
-  --work-dir $WORK_DIR
+accelerate launch sft.py training_mode=inverse_graphics model=qwen25_vl_3b
+sbatch scripts/train_sft_inverse.sbatch
 ```
 
-With LoRA:
-```bash
-accelerate launch --config_file ../accelerate_configs/deepspeed_sft.yaml sft.py \
-  --mode text \
-  --model-id Qwen2.5-3B \
-  --data-dir data/python_ft \
-  --use-lora \
-  --lora-rank 256 \
-  --lora-alpha 512 \
-  --work-dir $WORK_DIR
-```
-
-#### Option B: Multimodal (DeTikZifyv2)
+### 2c. Combined SFT (Stage 2 — TikZero+ style)
 
 ```bash
-accelerate launch --config_file ../accelerate_configs/deepspeed_sft.yaml sft.py \
-  --mode multimodal \
-  --detikzify-model detikzify-v2-8b \
-  --data-dir data/python_ft \
-  --max-seq-len 2048 \
-  --epochs 5 \
-  --batch-size 16 \
-  --lr 5e-5 \
-  --work-dir $WORK_DIR
+# From scratch (base VLM)
+accelerate launch sft.py training_mode=combined model=qwen25_vl_3b
+
+# From inverse graphics checkpoint (recommended TikZero+ pipeline)
+accelerate launch sft.py training_mode=combined model=qwen25_vl_3b \
+    resume_from=trained_models_sft_python/<inverse_run>/final
+
+# SLURM
+INVERSE_CHECKPOINT=<path_to_stage1_final> sbatch scripts/train_sft_combined.sbatch
 ```
 
-### Step 3 — GRPO Post-Training
-
-After SFT, apply reinforcement learning with Python execution rewards:
+### 3. GRPO Post-Training
 
 ```bash
-accelerate launch --config_file ../accelerate_configs/deepspeed_grpo.yaml grpo.py \
-  --model-id pythonft_text_Qwen2.5-3B_lr0.0001_ep5 \
-  --checkpoint checkpoint-XXXX \
-  --data-dir data/python_ft \
-  --reward-backend clip \
-  --reward-model openai/clip-vit-large-patch14 \
-  --batch-size 4 \
-  --gradient-accumulation 9 \
-  --num-generations 8 \
-  --lr 5e-6 \
-  --scheduler constant \
-  --work-dir $WORK_DIR
+accelerate launch grpo.py model.sft_run_id=<SFT_RUN>
+accelerate launch grpo.py model.sft_run_id=<SFT_RUN> reward=clip
+SFT_RUN_ID=<your_sft_run> sbatch scripts/train_grpo.sbatch
 ```
 
-Reward backends:
-| Backend | Model | Speed | Quality |
-|---------|-------|-------|---------|
-| `clip` | `openai/clip-vit-large-patch14` | Fast | Good |
-| `dreamsim` | `ensemble` | Medium | Best |
-| `detikzify` | `nllg/detikzify-v2-8b` | Slow | Good (EMD-based) |
+## Hydra Configuration
 
-### Step 4 — Inference (After Training)
-
-#### Text-only model:
-```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-model = AutoModelForCausalLM.from_pretrained("path/to/checkpoint", torch_dtype="bfloat16", device_map="auto")
-tokenizer = AutoTokenizer.from_pretrained("path/to/checkpoint")
-
-messages = [
-    {"role": "system", "content": "You are an expert at generating Python Matplotlib code."},
-    {"role": "user", "content": "Generate Python Matplotlib code for: A bar chart showing GDP of top 5 countries"},
-]
-
-text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-inputs = tokenizer(text, return_tensors="pt").to(model.device)
-output = model.generate(**inputs, max_new_tokens=2048, temperature=0.1, top_p=0.95)
-print(tokenizer.decode(output[0], skip_special_tokens=True))
-```
-
-#### With TikZero adapter (text → image embeddings → Python):
-```python
-from detikzify.model import load, load_adapter
-from detikzify.infer import DetikzifyPipeline
-
-pipeline = DetikzifyPipeline(
-    *load_adapter(
-        *load(model_name_or_path="path/to/finetuned-detikzify", device_map="auto", torch_dtype="bfloat16"),
-        adapter_name_or_path="nllg/tikzero-adapter",
-    )
-)
-fig = pipeline.sample(text="A neural network architecture diagram")
-```
-
-## File Structure
-
-```
-PythonFT/
-├── prepare_data.py    # JSONL → HuggingFace Dataset
-├── preprocessing.py   # Tokenization and batching
-├── rewards.py         # Python execution + image similarity rewards
-├── sft.py             # SFT training (text-only + multimodal)
-├── grpo.py            # GRPO post-training
-└── README.md          # This file
-```
-
-## Reward Mechanism
-
-The GRPO reward replaces TikZ LaTeX compilation with Python execution:
-
-```
-TikZ pipeline:   generate TikZ → pdflatex → PDF → pdftoppm → PNG → compare
-Python pipeline:  generate Python → exec() → plt.savefig() → PNG → compare
-```
-
-Python execution is faster and requires no external dependencies (no TeX Live, ghostscript, or poppler).
-
-## Key Differences from TikZ Pipeline
-
-| Aspect | TikZ (original) | Python (this pipeline) |
-|--------|-----------------|----------------------|
-| Output format | LaTeX/TikZ code | Python/Matplotlib code |
-| Compilation | pdflatex + poppler | exec() + plt.savefig() |
-| Dependencies | TeX Live, ghostscript | matplotlib, numpy |
-| Reward speed | ~30s (LaTeX compile) | ~2s (Python exec) |
-| Adapter | TikZero (frozen, reusable) | Same adapter works |
-| Decoder | Retrained for Python | Retrained for Python |
-
-## Monitoring
+All scripts use [Hydra](https://hydra.cc/) for composable configuration:
 
 ```bash
-tensorboard --logdir tf_logs_python_sft/   # SFT
-tensorboard --logdir tf_logs_python_grpo/  # GRPO
+# Override any value from CLI
+python prepare_data.py rendering.dpi=200
+
+# Switch config groups
+accelerate launch sft.py model=qwen25_vl_3b training_mode=inverse_graphics
+
+# Multiple overrides
+accelerate launch sft.py training_mode=combined model=qwen25_vl_7b training.lr=1e-5
+
+# Show all options
+python prepare_data.py --help
+accelerate launch sft.py -- --help
+```
+
+### Config Groups
+
+| Group    | Options                                           | Default      |
+|----------|---------------------------------------------------|--------------|
+| `model`  | `qwen25_3b`, `qwen25_7b`, `qwen25_vl_3b`, `qwen25_vl_7b` | `qwen25_3b` |
+| `reward` | `dinov2`, `clip`, `dreamsim`                       | `dinov2`     |
+
+### Training Mode Matrix
+
+| `training_mode` | Compatible Models | Packing | Needs `render_dir` |
+|-----------------|-------------------|---------|---------------------|
+| `text_only`     | `qwen25_3b`, `qwen25_7b` | Yes | No |
+| `inverse_graphics` | `qwen25_vl_3b`, `qwen25_vl_7b` | No | Yes |
+| `combined`      | `qwen25_vl_3b`, `qwen25_vl_7b` | No | Yes |
+
+### Environment Variables
+
+| Variable      | Used By    | Description                 |
+|---------------|------------|-----------------------------|
+| `PYVEC_ROOT`  | prepare    | Path to dataset root        |
+| `PYVEC_WORK`  | all        | Working directory for outputs |
+
+### Adding a New Model
+
+Create `configs/model/my_model.yaml`:
+
+```yaml
+# @package model
+id: MyModel-13B
+max_seq_len: 4096
+is_vlm: false    # true for VLMs
+```
+
+Then: `accelerate launch sft.py model=my_model`
+
+## SLURM Submission
+
+### Full Text-Only Pipeline
+
+```bash
+JOB1=$(sbatch --parsable scripts/prepare_data.sbatch)
+JOB2=$(sbatch --parsable --dependency=afterok:${JOB1} scripts/train_sft.sbatch)
+SFT_RUN_ID=<auto-name> sbatch --dependency=afterok:${JOB2} scripts/train_grpo.sbatch
+```
+
+### Full TikZero+ Pipeline
+
+```bash
+# Step 1: Prepare data
+JOB1=$(sbatch --parsable scripts/prepare_data.sbatch)
+
+# Step 2: Inverse Graphics SFT (Stage 1)
+JOB2=$(sbatch --parsable --dependency=afterok:${JOB1} scripts/train_sft_inverse.sbatch)
+
+# Step 3: Combined SFT (Stage 2 — TikZero+ fine-tuning)
+INVERSE_CHECKPOINT=<stage1_path> \
+  JOB3=$(sbatch --parsable --dependency=afterok:${JOB2} scripts/train_sft_combined.sbatch)
+
+# Step 4: GRPO (optional, on the combined model)
+SFT_RUN_ID=<combined_run> sbatch --dependency=afterok:${JOB3} scripts/train_grpo.sbatch
+```
+
+### Passing Extra Hydra Overrides to sbatch
+
+```bash
+sbatch scripts/train_sft.sbatch training.lr=1e-4 training.epochs=5
+sbatch scripts/train_sft_inverse.sbatch training.epochs=10 lora.enabled=true
+```
+
+### GPU Variants
+
+| Script                        | GPUs | Mode              | Effective Batch |
+|-------------------------------|------|-------------------|-----------------|
+| `train_sft.sbatch`            | 1    | text_only         | 8×4×1 = 32      |
+| `train_sft_4gpu.sbatch`       | 4    | text_only         | 4×2×4 = 32      |
+| `train_sft_inverse.sbatch`    | 1    | inverse_graphics  | 2×16×1 = 32     |
+| `train_sft_combined.sbatch`   | 1    | combined          | 2×16×1 = 32     |
+| `train_grpo.sbatch`           | 1    | —                 | 4×8×1 = 32      |
+| `train_grpo_4gpu.sbatch`      | 4    | —                 | 2×4×4 = 32      |
+
+## Design Choices
+
+### Why TikZero+ for Python?
+
+The TikZero+ paper shows that decoupling graphics program generation from text understanding yields better results than end-to-end training alone. Our adaptation:
+
+- **Inverse graphics** (Stage 1): The VLM learns to "read" a figure and write the Python code that produced it. This is self-supervised — we already have rendered images from `prepare_data.py`.
+- **Combined** (Stage 2): Adds caption understanding by fine-tuning with both image and caption inputs. This bridges the gap between visual understanding and text-guided generation.
+
+### Caption Selection
+Prioritizes `original_data.new_caption` over `caption` for higher-quality descriptions.
+
+### DINOv2 as Default Reward
+DINOv2 (`facebook/dinov2-large`) captures structural/spatial layout better than CLIP for scientific figure comparison.
+
+### Multi-Signal Reward
+```
+reward = execution_bonus + (1 - execution_bonus) × visual_similarity
+```
+
+### Sequence Packing (text-only SFT only)
+Packs multiple short samples into one sequence for ~30-40% better GPU utilization. Disabled for multimodal modes since images have fixed cost.
+
+## Requirements
+
+```
+torch
+transformers
+trl
+peft
+datasets
+accelerate
+deepspeed
+hydra-core
+omegaconf
+qwen-vl-utils
+orjson
+wandb
+tensorboard
+dreamsim
+POT
 ```

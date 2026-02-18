@@ -1,0 +1,24 @@
+# @package _global_
+# Data preparation: render Python code to images and build HF Arrow dataset
+
+defaults:
+  - _self_
+
+paths:
+  input: ${oc.env:PYVEC_ROOT,../../..}/dataset.jsonl
+  output: ${oc.env:PYVEC_WORK,./data}/python_ft
+  render_dir: ${oc.env:PYVEC_WORK,./data}/rendered_images
+
+filtering:
+  min_code_len: 50
+  max_code_len: 8000
+
+rendering:
+  dpi: 150
+  timeout: 30      # seconds per render
+  workers: 0       # 0 = use all CPU cores
+  skip: false      # set true to rebuild from cached PNGs
+
+split:
+  val_ratio: 0.066
+  seed: 42

@@ -1,0 +1,7 @@
+# @package model
+# DeTikZify v2.5 8B — inverse graphics VLM (image → code)
+id: detikzify-v2.5-8b
+hf_id: nllg/detikzify-v2.5-8b
+max_seq_len: 4096
+is_vlm: true
+is_detikzify: true

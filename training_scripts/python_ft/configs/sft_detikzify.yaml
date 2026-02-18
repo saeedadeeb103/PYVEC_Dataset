@@ -1,0 +1,45 @@
+# @package _global_
+# DeTikZify SFT: inverse graphics (image → Python/Matplotlib code)
+
+defaults:
+  - _self_
+  - model: detikzify_8b
+  - override hydra/job_logging: default
+
+paths:
+  data_dir: ${oc.env:PYVEC_WORK,./data}/python_ft
+  work_dir: ${oc.env:PYVEC_WORK,.}
+  render_dir: ${oc.env:PYVEC_WORK,./data}/rendered_images
+
+model:
+  id: detikzify-v2.5-8b
+  hf_id: nllg/detikzify-v2.5-8b
+  max_seq_len: 4096
+  is_vlm: true
+  is_detikzify: true
+
+training:
+  epochs: 3
+  batch_size: 1
+  gradient_accumulation: 32
+  lr: 2e-5
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  warmup_ratio: 0.05
+  scheduler: cosine
+  seed: 42
+
+lora:
+  enabled: true
+  rank: 64
+  alpha: 128
+  dropout: 0.05
+
+logging:
+  report_to: tensorboard
+
+hydra:
+  run:
+    dir: .
+  job:
+    chdir: false

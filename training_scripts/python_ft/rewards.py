@@ -1,16 +1,25 @@
-"""Reward functions for GRPO training with Python/Matplotlib execution feedback."""
+"""Reward functions for GRPO training with Python/Matplotlib execution feedback.
+
+Multi-signal rewards:
+  1. Execution reward — does the generated code run and produce a figure?
+  2. Visual similarity — how close is the rendered figure to the ground truth?
+
+The final reward = execution_bonus + visual_similarity, which gives the model
+a gradient signal even for code that runs but looks wrong, and zero reward
+for code that crashes.
+"""
 
 from __future__ import annotations
 
 import hashlib
 import io
 import os
-import shutil
-import uuid
+import signal
+import traceback
 from collections import OrderedDict
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, TimeoutError as FuturesTimeout
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 import matplotlib
 matplotlib.use("Agg")
@@ -18,146 +27,91 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from PIL import Image, ImageOps
-from torchmetrics.functional import pairwise_cosine_similarity
 
 
-def _file_cache_key(path: str) -> str:
-    try:
-        st = os.stat(path)
-        return f"{path}|{int(st.st_mtime)}|{st.st_size}"
-    except Exception:
-        return f"{path}|-1|-1"
+# ---------------------------------------------------------------------------
+# Execution engine
+# ---------------------------------------------------------------------------
+EXEC_TIMEOUT = 30  # seconds per code execution
+RENDER_DPI = 100
+IMAGE_SIZE = (448, 448)
+
+# Baseline reward for successfully producing a figure (even if it looks wrong)
+EXECUTION_BONUS = 0.1
 
 
-def _code_hash(code: str) -> str:
-    return hashlib.sha256(code.encode()).hexdigest()[:12]
+def execute_python_to_image(
+    code: str,
+    dpi: int = RENDER_DPI,
+    timeout: int = EXEC_TIMEOUT,
+) -> Optional[Image.Image]:
+    """Execute Python/Matplotlib code and capture the figure as a PIL Image.
 
-
-def execute_python_to_image(code: str, dpi: int = 100) -> Optional[Image.Image]:
+    Returns None if the code fails to execute or produces no axes.
+    """
     plt.close("all")
-    safe = code.replace("plt.show()", "")
-    ns = {"plt": plt, "__builtins__": __builtins__, "__name__": "__main__"}
+
+    safe = code.replace("plt.show()", "").replace("plt.ion()", "")
+
+    restricted_builtins = {
+        k: v for k, v in __builtins__.__dict__.items()
+        if k not in ("exit", "quit", "breakpoint", "input")
+    } if hasattr(__builtins__, "__dict__") else __builtins__
+
+    ns = {"__builtins__": restricted_builtins, "__name__": "__main__"}
+
     try:
-        exec(safe, ns)
+        exec(safe, ns)  # noqa: S102
         fig = plt.gcf()
         if not fig.get_axes():
             plt.close("all")
             return None
         buf = io.BytesIO()
-        fig.savefig(buf, format="png", dpi=dpi, bbox_inches="tight", facecolor="white", edgecolor="none")
+        fig.savefig(buf, format="png", dpi=dpi, bbox_inches="tight",
+                    facecolor="white", edgecolor="none")
         buf.seek(0)
         img = Image.open(buf).convert("RGB")
         img.load()
         plt.close("all")
-        return ImageOps.pad(img, (448, 448), color="white")
+        return ImageOps.pad(img, IMAGE_SIZE, color="white")
     except Exception:
         plt.close("all")
         return None
 
 
-class VisionScorer:
-    """Image similarity scoring using a frozen vision encoder (DeTikZifyw, SigLIP)."""
-
-    def __init__(self, model_path: str, device: Optional[torch.device] = None, batch_size: int = 16, cache_size: int = 4096):
-        self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.dtype = torch.bfloat16 if (self.device.type == "cuda" and torch.cuda.is_bf16_supported()) else torch.float32
-        self.batch_size = batch_size
-        self._cache = OrderedDict()
-        self._cache_size = cache_size
-
-        from detikzify.model import load as load_model
-        from detikzify.util import expand
-
-        model, processor = load_model(model_name_or_path=model_path, torch_dtype=self.dtype)
-        self._vision = getattr(getattr(model, "model", model), "vision_model")
-        self._vision.to(self.device).eval()
-        for p in self._vision.parameters():
-            p.requires_grad_(False)
-        self._proc = getattr(processor, "image_processor", processor)
-        self._expand = expand
-
-    def _preprocess(self, img: Image.Image) -> Image.Image:
-        img = img.convert("RGB")
-        return self._expand(img, max(img.size), do_trim=True)
-
-    def _encode_batch(self, images: list[Image.Image]) -> list[torch.Tensor]:
-        processed = [self._preprocess(im) for im in images]
-        enc = self._proc(images=processed, return_tensors="pt")
-        px = enc["pixel_values"]
-        if px.ndim == 3:
-            px = px.unsqueeze(0)
-        px = px.to(self.device, dtype=self.dtype, non_blocking=True)
-        with torch.inference_mode():
-            out = self._vision(pixel_values=px)
-            feats = out.last_hidden_state.detach().cpu().float()
-        return [feats[i] for i in range(feats.shape[0])]
-
-    def _get_features(self, images: list[Image.Image], keys: list[str]) -> list[Optional[torch.Tensor]]:
-        feats = [None] * len(images)
-        uncached_idx, uncached_imgs = [], []
-
-        for i, (img, key) in enumerate(zip(images, keys)):
-            if key in self._cache:
-                feats[i] = self._cache[key]
-                self._cache.move_to_end(key)
-            else:
-                uncached_idx.append(i)
-                uncached_imgs.append(img)
-
-        for start in range(0, len(uncached_imgs), self.batch_size):
-            batch = uncached_imgs[start:start + self.batch_size]
-            batch_idx = uncached_idx[start:start + self.batch_size]
-            encoded = self._encode_batch(batch)
-            for j, feat in enumerate(encoded):
-                idx = batch_idx[j]
-                feats[idx] = feat
-                key = keys[idx]
-                self._cache[key] = feat
-                self._cache.move_to_end(key)
-                if len(self._cache) > self._cache_size:
-                    self._cache.popitem(last=False)
-
-        return feats
-
-    @staticmethod
-    def _emd_score(x: torch.Tensor, y: torch.Tensor) -> float:
-        from ot.lp import emd2
-        dists = 1.0 - pairwise_cosine_similarity(x.double(), y.double())
-        score = 2 * np.tanh(-emd2(M=dists.numpy(), a=[], b=[])) + 1
-        return float(np.clip(score, 0.0, 1.0))
-
-    def score(self, images_a: list[Image.Image], images_b: list[Image.Image]) -> list[float]:
-        keys_a = [f"a_{id(img)}" for img in images_a]
-        keys_b = [f"b_{id(img)}" for img in images_b]
-        feats_a = self._get_features(images_a, keys_a)
-        feats_b = self._get_features(images_b, keys_b)
-        scores = []
-        for fa, fb in zip(feats_a, feats_b):
-            if fa is None or fb is None:
-                scores.append(0.0)
-                continue
-            try:
-                scores.append(self._emd_score(fa, fb))
-            except Exception:
-                scores.append(0.0)
-        return scores
+def _exec_worker(code: str) -> Optional[Image.Image]:
+    """Wrapper for ProcessPoolExecutor."""
+    return execute_python_to_image(code)
 
 
+# ---------------------------------------------------------------------------
+# Scorers
+# ---------------------------------------------------------------------------
 class CLIPScorer:
-    """Image similarity using CLIP cosine similarity."""
+    """Image similarity using CLIP cosine similarity (fast, no detikzify needed)."""
 
-    def __init__(self, model_name: str = "openai/clip-vit-large-patch14", device: Optional[torch.device] = None):
+    def __init__(
+        self,
+        model_name: str = "openai/clip-vit-large-patch14",
+        device: Optional[torch.device] = None,
+    ):
         from transformers import AutoModel, AutoProcessor
 
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.dtype = torch.bfloat16 if (self.device.type == "cuda" and torch.cuda.is_bf16_supported()) else torch.float32
-        self.model = AutoModel.from_pretrained(model_name, torch_dtype=self.dtype).to(self.device).eval()
+        self.dtype = (
+            torch.bfloat16
+            if (self.device.type == "cuda" and torch.cuda.is_bf16_supported())
+            else torch.float32
+        )
+        self.model = AutoModel.from_pretrained(model_name, torch_dtype=self.dtype)
+        self.model.to(self.device).eval()
         for p in self.model.parameters():
             p.requires_grad_(False)
         self.proc = AutoProcessor.from_pretrained(model_name)
 
     def _encode(self, images: list[Image.Image]) -> torch.Tensor:
-        enc = self.proc(images=images, return_tensors="pt")
+        images_rgb = [img.convert("RGB") for img in images]
+        enc = self.proc(images=images_rgb, return_tensors="pt")
         px = enc["pixel_values"].to(self.device, dtype=self.dtype)
         with torch.inference_mode():
             feats = self.model.get_image_features(pixel_values=px)
@@ -171,17 +125,75 @@ class CLIPScorer:
         return ((cos + 1.0) / 2.0).clamp(0, 1).tolist()
 
 
-class DreamSimScorer:
-    """Image similarity using DreamSim."""
+class DINOv2Scorer:
+    """Image similarity using DINOv2 CLS token cosine similarity.
 
-    def __init__(self, model_name: str = "ensemble", cache_dir: str = "models/dreamsim", device: Optional[torch.device] = None):
+    DINOv2 is ideal for scientific figure comparison because:
+    - Self-supervised vision model — captures structural/spatial features
+    - Strong at layout, shape, and color matching (better than CLIP for image-image)
+    - Fast inference, no text encoder overhead
+    """
+
+    def __init__(
+        self,
+        model_name: str = "facebook/dinov2-large",
+        device: Optional[torch.device] = None,
+    ):
+        from transformers import AutoModel, AutoImageProcessor
+
+        self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.dtype = (
+            torch.bfloat16
+            if (self.device.type == "cuda" and torch.cuda.is_bf16_supported())
+            else torch.float32
+        )
+        self.model = AutoModel.from_pretrained(model_name, torch_dtype=self.dtype)
+        self.model.to(self.device).eval()
+        for p in self.model.parameters():
+            p.requires_grad_(False)
+        self.proc = AutoImageProcessor.from_pretrained(model_name)
+
+    def _encode(self, images: list[Image.Image]) -> torch.Tensor:
+        images_rgb = [img.convert("RGB") for img in images]
+        enc = self.proc(images=images_rgb, return_tensors="pt")
+        px = enc["pixel_values"].to(self.device, dtype=self.dtype)
+        with torch.inference_mode():
+            out = self.model(pixel_values=px)
+            # Use CLS token (first token of last_hidden_state)
+            feats = out.last_hidden_state[:, 0, :].detach().cpu().float()
+        return feats / feats.norm(dim=-1, keepdim=True).clamp_min(1e-6)
+
+    def score(self, images_a: list[Image.Image], images_b: list[Image.Image]) -> list[float]:
+        fa = self._encode(images_a)
+        fb = self._encode(images_b)
+        cos = (fa * fb).sum(dim=-1)
+        # Map cosine [-1, 1] → [0, 1]
+        return ((cos + 1.0) / 2.0).clamp(0, 1).tolist()
+
+
+class DreamSimScorer:
+    """Image similarity using DreamSim perceptual distance."""
+
+    def __init__(
+        self,
+        model_name: str = "ensemble",
+        cache_dir: str = "models/dreamsim",
+        device: Optional[torch.device] = None,
+    ):
         from dreamsim import dreamsim
 
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.dtype = torch.bfloat16 if (self.device.type == "cuda" and torch.cuda.is_bf16_supported()) else torch.float32
+        self.dtype = (
+            torch.bfloat16
+            if (torch.cuda.is_available() and torch.cuda.is_bf16_supported())
+            else torch.float32
+        )
 
         Path(cache_dir).mkdir(parents=True, exist_ok=True)
-        model, processor = dreamsim(dreamsim_type=model_name, pretrained=True, normalize_embeds=True, device=self.device, cache_dir=cache_dir)
+        model, processor = dreamsim(
+            dreamsim_type=model_name, pretrained=True,
+            normalize_embeds=True, device=self.device, cache_dir=cache_dir,
+        )
         for ext in model.extractor_list:
             ext.model = ext.model.to(self.dtype)
             ext.proj = ext.proj.to(self.dtype)
@@ -205,37 +217,101 @@ class DreamSimScorer:
         return scores
 
 
-_MAX_EXEC_WORKERS = max(2, min(8, os.cpu_count() // 2))
+class DualScorer:
+    """Weighted combination of DINOv2 (structural) + CLIP (semantic).
+
+    DINOv2 captures layout/spatial similarity while CLIP adds semantic
+    alignment — useful when the reward should also reflect whether the
+    figure *means* the right thing, not just looks alike structurally.
+    """
+
+    def __init__(
+        self,
+        model_name: str = "facebook/dinov2-large",
+        dino_weight: float = 0.7,
+        clip_weight: float = 0.3,
+        device: Optional[torch.device] = None,
+    ):
+        self.dino = DINOv2Scorer(model_name, device=device)
+        self.clip = CLIPScorer("openai/clip-vit-large-patch14", device=device)
+        self.dw = dino_weight
+        self.cw = clip_weight
+
+    def score(self, images_a: list[Image.Image], images_b: list[Image.Image]) -> list[float]:
+        ds = self.dino.score(images_a, images_b)
+        cs = self.clip.score(images_a, images_b)
+        return [self.dw * d + self.cw * c for d, c in zip(ds, cs)]
 
 
-def make_python_reward(scorer: VisionScorer | CLIPScorer | DreamSimScorer):
-    """Build a GRPO-compatible reward function using Python execution + image similarity."""
+# ---------------------------------------------------------------------------
+# Composite reward function
+# ---------------------------------------------------------------------------
+_MAX_EXEC_WORKERS = max(2, min(8, (os.cpu_count() or 4) // 2))
 
-    def reward_fn(completions: list[str], ground_truth: list[str], reward_signal: list, **batch) -> list[float]:
-        rendered, gt_images = [], []
+
+def make_python_reward(
+    scorer: Union[CLIPScorer, DINOv2Scorer, DreamSimScorer, DualScorer],
+    execution_bonus: float = EXECUTION_BONUS,
+    max_workers: int = _MAX_EXEC_WORKERS,
+):
+    """Build a GRPO-compatible reward function.
+
+    Reward = execution_bonus (if code runs and produces a figure)
+           + (1 - execution_bonus) * visual_similarity
+
+    This gives partial credit for code that runs but produces wrong output,
+    and zero for code that crashes — creating a clear gradient signal for the
+    model to first learn to produce valid code, then improve visual fidelity.
+    """
+
+    def reward_fn(
+        completions: list[str],
+        ground_truth: list[str],
+        reward_signal: list,
+        **batch,
+    ) -> list[float]:
+        # Step 1: Execute all completions in parallel
+        rendered: list[Optional[Image.Image]] = []
+        with ProcessPoolExecutor(max_workers) as pool:
+            futures = [pool.submit(_exec_worker, code) for code in completions]
+            for fut in futures:
+                try:
+                    rendered.append(fut.result(timeout=EXEC_TIMEOUT + 5))
+                except Exception:
+                    rendered.append(None)
+
+        # Step 2: Collect valid pairs
+        valid_rendered, valid_gt = [], []
         valid_indices = []
 
-        with ThreadPoolExecutor(_MAX_EXEC_WORKERS) as pool:
-            futures = [pool.submit(execute_python_to_image, code) for code in completions]
-            rendered = [f.result() for f in futures]
-
         for i, (img_r, img_gt) in enumerate(zip(rendered, reward_signal)):
-            if img_r is None or img_gt is None:
+            if img_r is None:
                 continue
             try:
-                gt_img = img_gt if isinstance(img_gt, Image.Image) else Image.open(img_gt).convert("RGB")
-                gt_img = ImageOps.pad(gt_img, (448, 448), color="white")
-                gt_images.append(gt_img)
+                gt_img = (
+                    img_gt if isinstance(img_gt, Image.Image)
+                    else Image.open(img_gt).convert("RGB")
+                )
+                gt_img = ImageOps.pad(gt_img, IMAGE_SIZE, color="white")
+                valid_rendered.append(img_r)
+                valid_gt.append(gt_img)
                 valid_indices.append(i)
             except Exception:
                 continue
 
+        # Step 3: Compute rewards
         rewards = [0.0] * len(completions)
+
+        # Execution bonus for all samples that produced a figure
+        for i in range(len(completions)):
+            if rendered[i] is not None:
+                rewards[i] = execution_bonus
+
+        # Visual similarity for valid pairs
         if valid_indices:
-            valid_rendered = [rendered[i] for i in valid_indices]
-            scores = scorer.score(valid_rendered, gt_images)
-            for idx, s in zip(valid_indices, scores):
-                rewards[idx] = s
+            sim_scores = scorer.score(valid_rendered, valid_gt)
+            for idx, sim in zip(valid_indices, sim_scores):
+                rewards[idx] = execution_bonus + (1.0 - execution_bonus) * sim
 
         return rewards
 

@@ -1,0 +1,56 @@
+# @package _global_
+# GRPO post-training with Python execution rewards
+
+defaults:
+  - _self_
+  - model: qwen25_3b
+  - reward: dinov2
+  - override hydra/job_logging: default
+
+paths:
+  data_dir: ${oc.env:PYVEC_WORK,./data}/python_ft
+  work_dir: ${oc.env:PYVEC_WORK,.}
+
+model:
+  id: Qwen2.5-3B-Instruct
+  max_seq_len: 2048
+  sft_run_id: null         # set to SFT run directory name
+  checkpoint: null         # specific checkpoint, e.g. "checkpoint-1500"
+  use_base: false          # true = skip SFT, use base model directly
+
+reward:
+  backend: dinov2
+  model_name: facebook/dinov2-large
+  execution_bonus: 0.1
+
+training:
+  epochs: 1
+  batch_size: 2
+  gradient_accumulation: 16
+  num_generations: 4
+  lr: 5e-6
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  seed: 42
+
+generation:
+  temperature: 0.9
+  top_p: 0.95
+
+grpo:
+  loss_type: dr_grpo       # dr_grpo | grpo
+  epsilon: 0.2
+  epsilon_high: 0.28
+
+logging:
+  report_to: tensorboard
+
+resume_from: null
+
+hydra:
+  run:
+    dir: .
+  job:
+    chdir: false

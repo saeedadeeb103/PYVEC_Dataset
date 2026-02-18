@@ -1,0 +1,4 @@
+# @package reward
+backend: clip
+model_name: openai/clip-vit-large-patch14
+execution_bonus: 0.1

@@ -1,0 +1,4 @@
+# @package reward
+backend: dinov2
+model_name: facebook/dinov2-large
+execution_bonus: 0.1

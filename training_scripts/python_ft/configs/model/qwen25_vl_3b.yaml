@@ -1,0 +1,6 @@
+# @package model
+# Qwen2.5-VL-3B — Vision-Language Model for inverse graphics / combined SFT
+id: Qwen2.5-VL-3B-Instruct
+hf_id: Qwen/Qwen2.5-VL-3B-Instruct
+max_seq_len: 2048
+is_vlm: true

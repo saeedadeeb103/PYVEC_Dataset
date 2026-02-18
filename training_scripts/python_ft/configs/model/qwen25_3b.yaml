@@ -1,0 +1,5 @@
+# @package model
+id: Qwen2.5-3B-Instruct
+hf_id: Qwen/Qwen2.5-3B-Instruct
+max_seq_len: 2048
+is_vlm: false

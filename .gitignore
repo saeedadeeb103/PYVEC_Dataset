@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Hydra outputs
+.hydra/
+
+# Training artifacts
+trained_models_*/
+data/
+tf_logs_*/
+*.log
+
+# Generated images / figures (from code execution)
+training_scripts/python_ft/*.png
+training_scripts/python_ft/*.pdf
+training_scripts/python_ft/*.svg
+
+# Large external repos
+training_scripts/python_ft/DeTikZify/
+
+# Outputs / renders
+training_scripts/python_ft/outputs/
+training_scripts/python_ft/figures/
+
+# IDE / OS
+.cursor/
+.vscode/
+.DS_Store
+
+# Misc
+*.pdf
