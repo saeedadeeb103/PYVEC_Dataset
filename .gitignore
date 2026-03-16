@@ -28,6 +28,7 @@ training_scripts/python_ft/outputs/
 training_scripts/python_ft/figures/
 training_scripts/python_ft/eval_output*/
 training_scripts/python_ft/report_figures/
+Viewer/backend/render_cache/
 
 # IDE / OS
 .cursor/
