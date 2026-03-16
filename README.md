@@ -6,7 +6,7 @@ PYVEC is a repository for building and evaluating models that generate Python/Ma
 
 ## What Is In This Repository?
 
-- `dataset.jsonl`: Main curated JSONL training dataset used by the project. It contains `15,379` examples.
+- `dataset.jsonl`: Main curated JSONL training dataset used by the project. It contains `15,272` examples.
 - `Data_augmentation/final_dataset_deduplicated.jsonl`: Larger augmented dataset with `53,846` examples. This file is tracked with Git LFS.
 - `Scraping/`: Raw and validated visualization snippets collected from Kaggle, StackOverflow, GitHub, and official galleries.
 - `training_scripts/`: Training, preparation, and evaluation code for SFT and GRPO experiments.
@@ -52,7 +52,7 @@ PYVEC is a repository for building and evaluating models that generate Python/Ma
 
 - File: `dataset.jsonl`
 - Format: JSONL
-- Size: `15,379` records
+- Size: `15,272` records
 - Typical fields:
   - `id`
   - `python_code`
