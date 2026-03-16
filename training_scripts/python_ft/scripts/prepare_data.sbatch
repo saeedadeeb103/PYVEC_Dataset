@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=pyvec_prepare
-#SBATCH --output=/home/hpc/v123be/v123be26/pyvec/logs/prepare_%j.out
-#SBATCH --error=/home/hpc/v123be/v123be26/pyvec/logs/prepare_%j.err
+#SBATCH --output=logs/prepare_%j.out
+#SBATCH --error=logs/prepare_%j.err
 #SBATCH --time=06:00:00
 #SBATCH --gres=gpu:a40:1
 #SBATCH --partition=a40
@@ -12,17 +12,17 @@
 # Renders Python/Matplotlib code to images and builds HF Arrow dataset
 # ---------------------------------------------------------------------------
 
-source /home/hpc/v123be/v123be26/miniconda3/etc/profile.d/conda.sh
+source "$(conda info --base)/etc/profile.d/conda.sh" 2>/dev/null || true
 conda activate uni
 
 # Project paths
-export PYVEC_ROOT="/home/hpc/v123be/v123be26/PYVEC_Dataset"
-export PYVEC_WORK="/home/hpc/v123be/v123be26/PYVEC_Dataset/training_scripts/python_ft"
+export PYVEC_WORK="${PYVEC_WORK:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+export PYVEC_ROOT="${PYVEC_ROOT:-$(dirname "$(dirname "$PYVEC_WORK")")}"
 
 SCRIPT_DIR="${PYVEC_WORK}"
 cd "${SCRIPT_DIR}"
 
-mkdir -p /home/vault/v123be/v123be26/pyvec/logs
+mkdir -p "${PYVEC_WORK}/logs"
 
 echo "=== PYVEC Data Preparation ==="
 echo "Job ID: ${SLURM_JOB_ID}"

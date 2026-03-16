@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=pyvec_grpo
-#SBATCH --output=/home/hpc/v123be/v123be26/pyvec/logs/grpo_%j.out
-#SBATCH --error=/home/hpc/v123be/v123be26/pyvec/logs/grpo_%j.err
+#SBATCH --output=logs/grpo_%j.out
+#SBATCH --error=logs/grpo_%j.err
 #SBATCH --time=18:00:00
 #SBATCH --gres=gpu:a40:1
 #SBATCH --partition=a40
@@ -13,20 +13,20 @@
 #  Uses merged LoRA checkpoint from text-only SFT + DINOv2 reward on 1x A40.
 # ===========================================================================
 
-source /home/hpc/v123be/v123be26/miniconda3/etc/profile.d/conda.sh
+source "$(conda info --base)/etc/profile.d/conda.sh" 2>/dev/null || true
 conda activate uni
 
 source /etc/profile.d/modules.sh 2>/dev/null || source /usr/share/Modules/init/bash 2>/dev/null || true
-module load cuda/11.8.0 2>/dev/null || export CUDA_HOME=/apps/SPACK/0.19.1/opt/linux-almalinux8-zen/gcc-8.5.0/cuda-11.8.0-qrwohrlyazyilia56tybqfm5k3k6kiom
+module load cuda 2>/dev/null || true
 
-export PYVEC_ROOT="/home/hpc/v123be/v123be26/PYVEC_Dataset"
-export PYVEC_WORK="/home/hpc/v123be/v123be26/PYVEC_Dataset/training_scripts/python_ft"
+export PYVEC_WORK="${PYVEC_WORK:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+export PYVEC_ROOT="${PYVEC_ROOT:-$(dirname "$(dirname "$PYVEC_WORK")")}"
 
 SFT_RUN_ID="${SFT_RUN_ID:-pyvec_sft_Qwen2.5-3B-Instruct_lr2e-05_ep3_bs2x16_lora128}"
 
 cd "${PYVEC_WORK}"
 
-mkdir -p /home/hpc/v123be/v123be26/pyvec/logs
+mkdir -p "${PYVEC_WORK}/logs"
 
 echo "========================================================"
 echo "  PYVEC: GRPO RL Training — DINOv2 Reward — 1x A40"

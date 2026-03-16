@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=pyvec_resume_sft
-#SBATCH --output=/home/hpc/v123be/v123be26/pyvec/logs/resume_sft_combined_%j.out
-#SBATCH --error=/home/hpc/v123be/v123be26/pyvec/logs/resume_sft_combined_%j.err
+#SBATCH --output=logs/resume_sft_combined_%j.out
+#SBATCH --error=logs/resume_sft_combined_%j.err
 #SBATCH --time=24:00:00
 #SBATCH --gres=gpu:a40:1
 #SBATCH --partition=a40
@@ -17,16 +17,16 @@
 #  at the end of this job.
 # ===========================================================================
 
-source /home/hpc/v123be/v123be26/miniconda3/etc/profile.d/conda.sh
+source "$(conda info --base)/etc/profile.d/conda.sh" 2>/dev/null || true
 conda activate uni
 
-export PYVEC_ROOT="/home/hpc/v123be/v123be26/PYVEC_Dataset"
-export PYVEC_WORK="/home/hpc/v123be/v123be26/PYVEC_Dataset/training_scripts/python_ft"
+export PYVEC_WORK="${PYVEC_WORK:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+export PYVEC_ROOT="${PYVEC_ROOT:-$(dirname "$(dirname "$PYVEC_WORK")")}"
 
 SCRIPT_DIR="${PYVEC_WORK}"
 cd "${SCRIPT_DIR}"
 
-mkdir -p /home/hpc/v123be/v123be26/pyvec/logs
+mkdir -p "${PYVEC_WORK}/logs"
 
 echo "========================================================"
 echo "  PYVEC: RESUME Data Prep + Combined SFT (LoRA) on 1x A40"
