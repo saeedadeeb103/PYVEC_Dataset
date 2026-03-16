@@ -2,7 +2,7 @@
 #SBATCH --job-name=pyvec_grpo_4gpu
 #SBATCH --output=/home/vault/v123be/v123be26/pyvec/logs/grpo_4gpu_%j.out
 #SBATCH --error=/home/vault/v123be/v123be26/pyvec/logs/grpo_4gpu_%j.err
-#SBATCH --time=24:00:00
+#SBATCH --time=7:00:00
 #SBATCH --gres=gpu:a40:4
 #SBATCH --partition=a40
 #SBATCH --cpus-per-task=16
@@ -15,7 +15,7 @@ conda activate uni
 
 export PYVEC_WORK="/home/hpc/v123be/v123be26/PYVEC_Dataset/training_scripts/python_ft"
 
-SFT_RUN_ID="${SFT_RUN_ID:-pyvec_sft_Qwen2.5-3B_lr5e-05_ep3_bs8x4}"
+SFT_RUN_ID="${SFT_RUN_ID:-pyvec_sft_Qwen2.5-3B-Instruct_lr2e-05_ep3_bs2x16_lora128}"
 
 SCRIPT_DIR="${PYVEC_WORK}"
 ACCEL_CONFIG="${SCRIPT_DIR}/../accelerate_configs/deepspeed_grpo.yaml"

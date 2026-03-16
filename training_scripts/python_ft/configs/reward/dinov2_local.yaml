@@ -1,0 +1,5 @@
+# @package reward
+# Use pre-downloaded DINOv2 from project models/ (run download_reward_models.py on login node first)
+backend: dinov2
+model_name: ${paths.work_dir}/models/dinov2-large
+execution_bonus: 0.1

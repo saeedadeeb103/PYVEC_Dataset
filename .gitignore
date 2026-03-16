@@ -17,18 +17,23 @@ tf_logs_*/
 training_scripts/python_ft/*.png
 training_scripts/python_ft/*.pdf
 training_scripts/python_ft/*.svg
+training_scripts/python_ft/*.jpg
 
-# Large external repos
+# Large external repos / downloaded models
 training_scripts/python_ft/DeTikZify/
+training_scripts/python_ft/models/
 
-# Outputs / renders
+# Outputs / renders / eval results
 training_scripts/python_ft/outputs/
 training_scripts/python_ft/figures/
+training_scripts/python_ft/eval_output*/
+training_scripts/python_ft/report_figures/
 
 # IDE / OS
 .cursor/
 .vscode/
 .DS_Store
+__MACOSX/
 
 # Misc
 *.pdf

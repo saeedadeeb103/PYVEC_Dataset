@@ -34,13 +34,18 @@ def _is_lora_adapter(path: str) -> bool:
     return os.path.isfile(os.path.join(path, "adapter_config.json"))
 
 
-def load_model_and_tokenizer(model_path: str):
-    """Load model + tokenizer, handling both full checkpoints and LoRA adapters."""
+def load_model_and_tokenizer(model_path: str, peft_cfg: DictConfig | None = None):
+    """Load model + tokenizer, handling both full checkpoints and LoRA adapters.
+
+    If peft_cfg is provided and peft_cfg.enable is True, a fresh LoRA adapter
+    is applied on top of the (possibly merged) model for parameter-efficient
+    GRPO training.
+    """
     if _is_lora_adapter(model_path):
         from peft import PeftConfig, PeftModel
 
-        peft_cfg = PeftConfig.from_pretrained(model_path)
-        base_id = peft_cfg.base_model_name_or_path
+        sft_peft_cfg = PeftConfig.from_pretrained(model_path)
+        base_id = sft_peft_cfg.base_model_name_or_path
         log.info(f"LoRA adapter detected — loading base model: {base_id}")
 
         base_model = AutoModelForCausalLM.from_pretrained(
@@ -57,6 +62,29 @@ def load_model_and_tokenizer(model_path: str):
             model_path, torch_dtype=torch.bfloat16,
         )
         tokenizer = AutoTokenizer.from_pretrained(model_path)
+
+    # --- Apply PEFT LoRA for efficient GRPO training ---
+    if peft_cfg and peft_cfg.enable:
+        from peft import LoraConfig, get_peft_model
+
+        target_modules = list(peft_cfg.target_modules) if peft_cfg.target_modules else None
+        lora_config = LoraConfig(
+            r=peft_cfg.r,
+            lora_alpha=peft_cfg.lora_alpha,
+            lora_dropout=peft_cfg.lora_dropout,
+            target_modules=target_modules,
+            task_type="CAUSAL_LM",
+            bias="none",
+        )
+        model = get_peft_model(model, lora_config)
+        trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        total = sum(p.numel() for p in model.parameters())
+        log.info(
+            f"PEFT LoRA applied for GRPO — trainable: {trainable:,} / {total:,} "
+            f"({100 * trainable / total:.2f}%) | r={peft_cfg.r} alpha={peft_cfg.lora_alpha}"
+        )
+    else:
+        model.requires_grad_(True)
 
     tokenizer.padding_side = "left"
     if tokenizer.pad_token_id is None:
@@ -115,7 +143,8 @@ def main(cfg: DictConfig):
     # --- Load model ---
     model_path = resolve_model_path(cfg)
     log.info(f"Loading model from {model_path}")
-    model, tokenizer = load_model_and_tokenizer(model_path)
+    peft_cfg = cfg.get("peft", None)
+    model, tokenizer = load_model_and_tokenizer(model_path, peft_cfg=peft_cfg)
 
     # --- Load & preprocess data ---
     dd = load_from_disk(cfg.paths.data_dir)
@@ -150,12 +179,16 @@ def main(cfg: DictConfig):
 
     # --- Run ID & output ---
     sft_tag = cfg.model.sft_run_id or cfg.model.id
+    peft_tag = ""
+    if peft_cfg and peft_cfg.enable:
+        peft_tag = f"_lora{peft_cfg.r}"
     run_id = (
         f"pyvec_grpo_{sft_tag}"
         f"_{cfg.reward.backend}"
         f"_lr{cfg.training.lr}"
         f"_gen{cfg.training.num_generations}"
         f"_bs{cfg.training.batch_size}x{cfg.training.gradient_accumulation}"
+        f"{peft_tag}"
     )
     output_path = os.path.join(cfg.paths.work_dir, "trained_models_grpo_python", run_id)
     log.info(f"Output: {output_path}")

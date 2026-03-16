@@ -47,6 +47,20 @@ grpo:
 logging:
   report_to: tensorboard
 
+peft:
+  enable: false              # set to true for parameter-efficient GRPO
+  r: 32                      # LoRA rank
+  lora_alpha: 64             # LoRA alpha (scaling)
+  lora_dropout: 0.05
+  target_modules:            # which layers to adapt
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
 resume_from: null
 
 hydra:
